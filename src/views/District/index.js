@@ -112,13 +112,15 @@ class District extends Component{
      
      {districtKeys.map((val,i)=>{                             
                   const reuseDistrictMatch=match.districts[val].total
+                  if(reuseDistrictMatch.tested===undefined){
+                    reuseDistrictMatch.tested="N/A"
+                  }
        return <div style={{marginLeft:"110px"}}>
-                    <ul class="sta891responsive-table">
-                      <li className="sta891Statedata_table_row link dim black b shadow-5" style={{cursor:"pointer"}}>
-                         
+                    <ul className="sta891responsive-table">
+                      <li className="sta891Statedata_table_row link dim black b shadow-5" style={{cursor:"pointer"}}>                         
                          <div className="sta891col  sta891col-0">{val}</div> 
                          <div className="sta891col  sta891col-1"><NumberFormat value={reuseDistrictMatch.confirmed} displayType={'text'} thousandSeparator={true}/></div> 
-                         <div className="sta891col  sta891col-2"><NumberFormat value={reuseDistrictMatch.tested}displayType={'text'} thousandSeparator={true}/> </div>
+                         <div className="sta891col  sta891col-2">{reuseDistrictMatch.tested}</div>
                          <div className="sta891col  sta891col-3"><NumberFormat value={reuseDistrictMatch.recovered}displayType={'text'} thousandSeparator={true}/></div> 
                          <div className="sta891col  sta891col-4"><NumberFormat value={reuseDistrictMatch.deceased}displayType={'text'} thousandSeparator={true}/></div>                                                                               
                         
@@ -129,5 +131,24 @@ class District extends Component{
      </>
   )
 }
+
+// parthbhatey=()=>{
+// const matchID=this.props.match.params.id;
+// const match=this.state.arr[matchID];
+// const districtKeys=Object.keys(match.districts);
+
+//  {districtKeys.map((val,i)=>{                             
+//       const reuseDistrictMatch=match.districts[val].total
+//        if(reuseDistrictMatch.tested===undefined){
+//          reuseDistrictMatch.tested="Not Available"
+//        }
+//        return <div style={{marginLeft:"110px"}}>
+//                     <ul class="sta891responsive-table">
+//                     <NumberFormat value={reuseDistrictMatch.tested}displayType={'text'} thousandSeparator={true}/>
+//                     </ul>
+//                </div>
+//       })} 
+// }
+
 }
 export default District;

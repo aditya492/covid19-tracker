@@ -11,12 +11,10 @@ background:#161625;
     width: 96%;
     padding: 16px;
     border-radius: 0px;
-    border: double;
     font-family: 'Roboto';
     position: relative;
-    border-top: 4px solid white;
-    border-right: 4px solid white;
-    border-left: 4px solid white;
+    background:#1e1e30;
+   
     font-size: 18px;
 }
 .sta891MainH1{
@@ -47,7 +45,7 @@ display: flex;
    border-bottom:4px solid rgba(108,117,170,.06274509803921569);
 }
 .sta891Box:hover{
-	background-color:#DCDCDC;
+	background-color:rgba(108,117,125,.06274509803921569);
 	transition: all .9s ease;
   z-index: 1000;
 }
@@ -79,7 +77,7 @@ color:black;
 }
 
 .sta891HomeIndia{
-font-size: 36px;
+    font-size: 36px;
     text-shadow: 1px 1px chartreuse;
     margin-bottom: 23px;
     display: flex;
@@ -88,8 +86,7 @@ font-size: 36px;
 }
 .sta891SearchResult{
   position: absolute;
-  width: 762px;
-  border:1px solid black;
+  width: 761px;
   z-index:10;
   font-family: 'Roboto';
 }

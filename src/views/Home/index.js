@@ -94,7 +94,7 @@ componentDidMount(){
        </div>
        <div className="sta891Statediv28">
                  
-            <input className="sta891stateInput" onChange={(e)=>this.setState({searchterm:e.target.value})} placeholder="&#128269; Enter Your State here" style={{color: "white"}}></input>
+            <input className="sta891stateInput shadow-5" onChange={(e)=>this.setState({searchterm:e.target.value})} placeholder="&#128269; Enter Your State here" style={{color: "white"}}></input>
               
               <div className="sta891SearchResult">
                  <div className="sta891SearchResult"><h3>{this.filterInputUI()}</h3></div>             

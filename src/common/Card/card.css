@@ -1,13 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap');
 
 .c11card{
-    height:250px;
-	width: 200px;
-	border:thick;
-  font-family:'Roboto';
-   transform: translateX(408px);
-    border:2px solid;
+    height: 249px;
+    width: 177px;
+    border: thick;
+    font-family: 'Roboto';
+    transform: translateX(408px);
+    border: 2px solid;
     border-style: dashed;
+    margin: 77px;
+    margin-left: -31px;
 
 	/*background:transparent;
 	 -moz-box-shadow: 0 0 10px #ccc;
@@ -33,19 +35,18 @@
   color:#228B22;
 }
 .main{
-	display: flex;
+	display: inline-flex;
 	justify-content:space-evenly;
 	margin:40px; 
 	margin:-21px;
 	padding: 35px;
+  margin-left: -248px;
 }
-.c11card:hover{
-	
-	transition: all .4s ease;
-   -webkit-transition: all .4s ease;
+.c11card:hover{	 
+   -webkit-transition: all .6s ease;
     -moz-box-shadow: 0 0 10px #ccc;
-    -webkit-box-shadow: 0 0 10px #ccc;
-     box-shadow: 0 0 10px #ccc;
+    -w=ebkit-box-shadow: 0 0 10px #ccc;
+     box-shadow: 0 0 10px #ccc;      
 }
 .cardmain01{
 	display: flex;

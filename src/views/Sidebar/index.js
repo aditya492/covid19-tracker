@@ -22,7 +22,7 @@ class  Sidebar extends Component{
    
 	return(
 		<>
-    <div className="nav .shadow-5">
+    <div className="nav shadow-5">
 		
     <div className="navbar">
       <Link to="/" className="menu-bars" style={{color:"white"}}>

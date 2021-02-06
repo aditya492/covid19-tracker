@@ -13,6 +13,7 @@ class Card extends Component{
 
 		return(
 			<>
+      <div className="sta891main001">
 			<div className="main">
 
               
@@ -48,6 +49,7 @@ class Card extends Component{
             </div>
             
                
+             </div>
              </div>
 			</>
 			)

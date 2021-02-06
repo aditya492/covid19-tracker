@@ -10,7 +10,7 @@ export const Statelist={
 "CH": "Chandigarh",
 "CT": "Chhattisgarh",
 "DL": "Delhi",
-"DN": "Dadra and Nagar Havel",
+"DN": "Dadra and Nagar Haveli",
 "GA": "Goa",
 "GJ": "Gujarat",
 "HP": "Himachal Pradesh",

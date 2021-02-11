@@ -10,8 +10,10 @@ ReactDOM.render(<BrowserRouter>
            <div>
            <Switch>
            <Route path="/" exact component={Home}/>
-           <Route path="/state/:id" component={District}/>           
+           <Route path="/state/:id" component={District}/>                      
            <Route component={Errorr}/>
+           <Route path="*" component={Errorr} status={404}/>
+           
            </Switch>
            </div>
           </BrowserRouter>

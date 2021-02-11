@@ -1,22 +1,29 @@
 import React,{Component} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-import './home.css';
-import Card from '../../common/Card'
 import NumberFormat from 'react-number-format';
+
+import './home.css';
+
+import Card from '../../common/Card'
+import StateSearchBar from '../../common/StateSearchBar';
+
 import Calculatedata from '../../utils/Calculatedata';
+import getCovidData from '../../utils/Storage';
+
 import {BsSearch} from "react-icons/bs";
 import {GoAlert} from "react-icons/go";
-import 'tachyons';
-import State_List from '../../helper/Statelist';
-import {GiHypodermicTest,GiConfirmed,GiAbstract033} from "react-icons/gi";
 import {RiDeviceRecoverLine} from "react-icons/ri";
 import {AiFillMedicineBox} from "react-icons/ai";
 import {FcCalendar} from "react-icons/fc";
 import {FaArrowAltCircleRight} from "react-icons/fa";
-import getCovidData from '../../utils/Storage';
+import {GiHypodermicTest,GiConfirmed,GiAbstract033} from "react-icons/gi";
+import 'tachyons';
+
+import State_List from '../../helper/Statelist';
+
 import Sidebar from '../Sidebar'
-import StateSearchBar from '../../common/StateSearchBar';
+
 
 
 class Home extends Component{
@@ -74,7 +81,7 @@ componentDidMount(){
              statedata,
         } =this.state;
 
-        console.log(statedata);
+      
 
     if(!error){ 
 		return(
@@ -135,7 +142,8 @@ componentDidMount(){
 //FUNTION TO SHOW DATA
 
 statetableUI=()=>{
-  const key=Object.keys(this.state.statedata)
+  const {statedata}=this.state
+  const key=Object.keys(statedata)
     
   return(
      <>
@@ -143,7 +151,7 @@ statetableUI=()=>{
      {key.map((val,i)=>{
 
                         
-          const reuseStatedata=this.state.statedata[val]
+          const reuseStatedata=statedata[val]
 
           return <Link to={"state/"+val} style={{textDecoration:"none"}}>
                     <ul>
@@ -174,13 +182,13 @@ statetableUI=()=>{
 
 filterInputUI=()=>{
    const statearray=Object.keys(State_List)
-   
+   const{searchterm}=this.state;
      const statemapping=statearray.filter((val,i)=>{
      const value=State_List[val]
-     if(this.state.searchterm==""){
+     if(searchterm==""){
        return ;
      }
-     else if(value.toLowerCase().includes(this.state.searchterm.toLowerCase())){
+     else if(value.toLowerCase().includes(searchterm.toLowerCase())){
        return value;
         
          

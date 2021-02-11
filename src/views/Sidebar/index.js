@@ -96,7 +96,7 @@ sideinput=()=>{
     return(
     <>
     <div className="navt">
-	   <Link to="/"> <h1 style={{background: "#060b26",color:"white",textDecoration:"none"}}>Home</h1></Link>
+	   <Link to="/"> <h1 style={{background: "#060b26",color:"white"}}>Home</h1></Link>
      </div>
     </>
 )

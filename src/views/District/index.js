@@ -1,12 +1,17 @@
 import React,{Component} from 'react';
-import Card from '../../common/Card';
-import axios from  'axios';
-import State_List from '../../helper/Statelist';
-import NumberFormat from 'react-number-format';
 import {Link} from 'react-router-dom';
+import NumberFormat from 'react-number-format';
+import axios from  'axios';
+
+import Card from '../../common/Card';
+
+import State_List from '../../helper/Statelist';
+
+import getCovidData from '../../utils/Storage';
+
 import 'tachyons';
 import './district.css';
-import getCovidData from '../../utils/Storage';
+
 import Sidebar from '../Sidebar'
 
 
@@ -60,16 +65,7 @@ class District extends Component{
           const deceased=loading ? null:arr[reuseMatchid].total.deceased;
           const tested=loading ? null:arr[reuseMatchid].total.tested;
           const vaccinated=loading ? null:arr[reuseMatchid].total.vaccinated; 
-        
-         
-    
-
-      
-      const inputHandler=(e)=>{
-          this.setState({searchterm:e.target.value})
-      }
-
-    
+          
     
       if(!error){
   		return(
@@ -89,7 +85,7 @@ class District extends Component{
 
         <div className="sta891Statediv28">
             
-            <input className="sta891stateInput shadow-5" onChange={inputHandler} placeholder="&#128269; Enter Your State here" style={{color: "white"}}></input> 
+            <input className="sta891stateInput shadow-5" onChange={(e)=>this.inputHandler(e)} placeholder="&#128269; Enter Your State here" style={{color: "white"}}></input> 
               
               <div className="sta891SearchResult">
                  <div className="sta891SearchResult"><h3 className="sta891ResultsRow">{loading ? <h1 style={{textAlign:"center",color:"white"}}>Loading....</h1>: this.filterInputUI()}</h3></div>            
@@ -108,7 +104,7 @@ class District extends Component{
                   
                 </li>
           </div>
-          {loading ? <h1 style={{textAlign:"center",color:"white"}}>Loading....</h1>:this.DistrictUI()}
+          {loading ? <h1 style={{textAlign:"center",color:"white"}}>Loading....</h1>:this.getDistrictUI()}
          
 			</>
 			)
@@ -119,8 +115,14 @@ class District extends Component{
 	}
 
 
+
+  inputHandler=(e)=>{
+          this.setState({searchterm:e.target.value})
+      }
+
+
 //FUNCTION TO SHOW DISTRICT DATA
- DistrictUI=()=>{
+ getDistrictUI=()=>{
    
    const matchID=this.props.match.params.id
   
@@ -135,7 +137,7 @@ class District extends Component{
      {districtKeys.map((val,i)=>{ 
 
                             
-                  const reuseDistrictMatch=match.districts[val].total
+       const reuseDistrictMatch=match.districts[val].total
                  
        return <div style={{marginLeft:"110px"}}>
                     <ul className="sta891responsive-table">
@@ -146,11 +148,11 @@ class District extends Component{
                          <div className="sta891Col  sta891Col-3">{isNaN(reuseDistrictMatch.recovered) ? "N/A" : <NumberFormat value={reuseDistrictMatch.recovered} displayType={'text'} thousandSeparator={true}/>}</div> 
                          <div className="sta891Col  sta891Col-4">{isNaN(reuseDistrictMatch.deceased)  ? "N/A" : <NumberFormat value={reuseDistrictMatch.deceased} displayType={'text'} thousandSeparator={true}/>}</div>                                                                               
                         
-                      </li>
+                      </li> 
                     </ul>
                </div>
       })} 
-     </>
+     </>  
   )
 }
 

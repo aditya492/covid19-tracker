@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import Card from '../../common/Card';
 import axios from  'axios';
-import Statelist from '../../utils/Statelist';
+import State_List from '../../helper/Statelist';
 import NumberFormat from 'react-number-format';
 import {Link} from 'react-router-dom';
 import 'tachyons';
@@ -18,7 +18,8 @@ class District extends Component{
             arr:null,
             loading:true,
             error:false,
-
+            statedata:[],
+            searchterm:'',
       }
     }
 
@@ -26,19 +27,13 @@ class District extends Component{
      
       getCovidData()
      .then(res=>{
-          const reuseMatchid= this.props.match.params.id            
+                  
           this.setState({
           arr:res.data,
           loading:false,
-          confirmed:res.data[reuseMatchid].total.confirmed,
-          recover:res.data[reuseMatchid].total.recovered,
-          tested:res.data[reuseMatchid].total.tested,
-          deceased:res.data[reuseMatchid].total.deceased,
-          vaccinated:res.data[reuseMatchid].total.vaccinated,                
-         })            
-     })
-     .then(err=>{
-       
+                 
+         })  
+                
      })
      .catch((e)=>{
        this.setState({
@@ -49,42 +44,71 @@ class District extends Component{
    
    
 
-	render(){  
+	render(){   
 
-       const{confirmed,
-             recover,
-             tested,
-             deceased,
-             vaccinated
+       const{
+             error,
+             arr,
+             loading
         } =this.state;
+     
+          const reuseMatchid= this.props.match.params.id 
+      
 
-   
-  
-      if(!this.state.error){
+          const confirmed=loading ? null:arr[reuseMatchid].total.confirmed;
+          const recovered=loading ? null:arr[reuseMatchid].total.recovered;
+          const deceased=loading ? null:arr[reuseMatchid].total.deceased;
+          const tested=loading ? null:arr[reuseMatchid].total.tested;
+          const vaccinated=loading ? null:arr[reuseMatchid].total.vaccinated; 
+        
+         
+    
+
+      
+      const inputHandler=(e)=>{
+          this.setState({searchterm:e.target.value})
+      }
+
+    
+    
+      if(!error){
   		return(
 			<>
 			        <Sidebar/>
-             <h1 className="sta891Cardh1C1">{Statelist[this.props.match.params.id]}</h1>
+             <h1 className="sta891Cardh1C1">{State_List[this.props.match.params.id]}</h1>
+              
+              
+               
                <Card
                 confirmed={confirmed}
-                recovered={recover}
+                recovered={recovered}
                 tested={tested}
                 deceased={deceased}
                 vaccinated={vaccinated}         
                />
 
-               
+        <div className="sta891Statediv28">
+            
+            <input className="sta891stateInput shadow-5" onChange={inputHandler} placeholder="&#128269; Enter Your State here" style={{color: "white"}}></input> 
+              
+              <div className="sta891SearchResult">
+                 <div className="sta891SearchResult"><h3 className="sta891ResultsRow">{loading ? <h1 style={{textAlign:"center",color:"white"}}>Loading....</h1>: this.filterInputUI()}</h3></div>            
+              </div>
+                   
+        </div> 
+
+     
               <div className="sta891color_State_body">
                 <li className="sta891Table_Header_">
-                   <div className="sta891col sta891col-0">Districts</div>
-                   <div className="sta891col sta891col-1">Confirmed</div>
-                   <div className="sta891col sta891col-2">Tested</div>
-                   <div className="sta891col sta891col-3">Recovered</div>
-                   <div className="sta891col sta891col-4">Deceased</div>
+                   <div className="sta891Col sta891Col-0">Districts</div>
+                   <div className="sta891Col sta891Col-1">Confirmed</div>
+                   <div className="sta891Col sta891Col-2">Tested</div>
+                   <div className="sta891Col sta891Col-3">Recovered</div>
+                   <div className="sta891Col sta891Col-4">Deceased</div>
                   
                 </li>
           </div>
-          {this.state.loading ? <h1 style={{textAlign:"center",color:"white"}}>Loading....</h1>:this.DistrictUI()}
+          {loading ? <h1 style={{textAlign:"center",color:"white"}}>Loading....</h1>:this.DistrictUI()}
          
 			</>
 			)
@@ -96,9 +120,7 @@ class District extends Component{
 
 
 //FUNCTION TO SHOW DISTRICT DATA
-// <NumberFormat value={match.districts[val].total.recovered}displayType={'text'} thousandSeparator={true}/><sup style={{color:"#483d8b"}}>R</sup>
- // <NumberFormat value={match.districts[val].total.tested}displayType={'text'} thousandSeparator={true}/> </div>
-  DistrictUI=()=>{
+ DistrictUI=()=>{
    
    const matchID=this.props.match.params.id
   
@@ -110,19 +132,19 @@ class District extends Component{
   return(
      <>
      
-     {districtKeys.map((val,i)=>{                             
+     {districtKeys.map((val,i)=>{ 
+
+                            
                   const reuseDistrictMatch=match.districts[val].total
-                  if(reuseDistrictMatch.tested===undefined){
-                    reuseDistrictMatch.tested="N/A"
-                  }
+                 
        return <div style={{marginLeft:"110px"}}>
                     <ul className="sta891responsive-table">
-                      <li className="sta891Statedata_table_row link dim black b shadow-5" style={{cursor:"pointer"}}>                         
-                         <div className="sta891col  sta891col-0">{val}</div> 
-                         <div className="sta891col  sta891col-1"><NumberFormat value={reuseDistrictMatch.confirmed} displayType={'text'} thousandSeparator={true}/></div> 
-                         <div className="sta891col  sta891col-2">{reuseDistrictMatch.tested}</div>
-                         <div className="sta891col  sta891col-3"><NumberFormat value={reuseDistrictMatch.recovered}displayType={'text'} thousandSeparator={true}/></div> 
-                         <div className="sta891col  sta891col-4"><NumberFormat value={reuseDistrictMatch.deceased}displayType={'text'} thousandSeparator={true}/></div>                                                                               
+                      <li className="sta891Statedata_table_row link dim black b shadow-5" >                         
+                         <div className="sta891Col  sta891Col-0">{val}</div> 
+                         <div className="sta891Col  sta891Col-1">{isNaN(reuseDistrictMatch.confirmed) ? "N/A" : <NumberFormat value={reuseDistrictMatch.confirmed} displayType={'text'} thousandSeparator={true}/>}</div>
+                         <div className="sta891Col  sta891Col-2">{isNaN(reuseDistrictMatch.tested)    ? "N/A" : <NumberFormat value={reuseDistrictMatch.tested} displayType={'text'} thousandSeparator={true}/>}</div>
+                         <div className="sta891Col  sta891Col-3">{isNaN(reuseDistrictMatch.recovered) ? "N/A" : <NumberFormat value={reuseDistrictMatch.recovered} displayType={'text'} thousandSeparator={true}/>}</div> 
+                         <div className="sta891Col  sta891Col-4">{isNaN(reuseDistrictMatch.deceased)  ? "N/A" : <NumberFormat value={reuseDistrictMatch.deceased} displayType={'text'} thousandSeparator={true}/>}</div>                                                                               
                         
                       </li>
                     </ul>
@@ -132,23 +154,37 @@ class District extends Component{
   )
 }
 
-// parthbhatey=()=>{
-// const matchID=this.props.match.params.id;
-// const match=this.state.arr[matchID];
-// const districtKeys=Object.keys(match.districts);
+filterInputUI=()=>{
+     
+   const statearray=Object.keys(State_List)
+   
+     const statemapping=statearray.filter((val,i)=>{
+     const value=State_List[val]
+     if(this.state.searchterm==""){
+       return ;
+     }
+     else if(value.toLowerCase().includes(this.state.searchterm.toLowerCase())){
+       return (
+         <>value</>
+         )
 
-//  {districtKeys.map((val,i)=>{                             
-//       const reuseDistrictMatch=match.districts[val].total
-//        if(reuseDistrictMatch.tested===undefined){
-//          reuseDistrictMatch.tested="Not Available"
-//        }
-//        return <div style={{marginLeft:"110px"}}>
-//                     <ul class="sta891responsive-table">
-//                     <NumberFormat value={reuseDistrictMatch.tested}displayType={'text'} thousandSeparator={true}/>
-//                     </ul>
-//                </div>
-//       })} 
-// }
+     }
+   }).map((val,i)=>{
+           
+         return <Link to={val} style={{color:"white",textDecoration:"none"}}><div className="sta891Box">                     
+                     {State_List[val]}                                                                                                                    
+              </div></Link>
+              
+   })
+   return(
+   <>
+      {statemapping}
+
+     
+   </>
+
+   )
+}
 
 }
 export default District;

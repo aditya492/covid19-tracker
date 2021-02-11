@@ -8,7 +8,7 @@ import Calculatedata from '../../utils/Calculatedata';
 import {BsSearch} from "react-icons/bs";
 import {GoAlert} from "react-icons/go";
 import 'tachyons';
-import Statelist from '../../utils/Statelist';
+import State_List from '../../helper/Statelist';
 import {GiHypodermicTest,GiConfirmed,GiAbstract033} from "react-icons/gi";
 import {RiDeviceRecoverLine} from "react-icons/ri";
 import {AiFillMedicineBox} from "react-icons/ai";
@@ -16,6 +16,8 @@ import {FcCalendar} from "react-icons/fc";
 import {FaArrowAltCircleRight} from "react-icons/fa";
 import getCovidData from '../../utils/Storage';
 import Sidebar from '../Sidebar'
+import StateSearchBar from '../../common/StateSearchBar';
+
 
 class Home extends Component{
 	constructor(props){
@@ -51,8 +53,7 @@ componentDidMount(){
              
 
      })
-     .catch((e)=>{
-       console.log("ghgh",e)
+     .catch((e)=>{      
          this.setState({
            error:true,
          })
@@ -67,10 +68,15 @@ componentDidMount(){
              recover,
              tested,
              deceased,
-             vaccinated
+             vaccinated,
+             error,
+             loading,
+             statedata,
         } =this.state;
 
-    if(!this.state.error){ 
+        console.log(statedata);
+
+    if(!error){ 
 		return(
 			<>
 
@@ -92,14 +98,8 @@ componentDidMount(){
 
               		    
        </div>
-       <div className="sta891Statediv28">
-                 
-            <input className="sta891stateInput shadow-5" onChange={(e)=>this.setState({searchterm:e.target.value})} placeholder="&#128269; Enter Your State here" style={{color: "white"}}></input>
-              
-              <div className="sta891SearchResult">
-                 <div className="sta891SearchResult"><h3>{this.filterInputUI()}</h3></div>             
-              </div>         
-        </div> 
+     
+         <StateSearchBar/>
 
         <div className="sta891CurrentDate"><FcCalendar style={{fontSize:"25px"}}/><span>{this.currentdate()}</span></div>
 
@@ -108,12 +108,12 @@ componentDidMount(){
           <div className="sta891color_State_body">
 
                 <li className="sta891Table_Header_ ">
-                  <div className="sta891col sta891col-0">States/UT</div>
-                   <div className="sta891col sta891col-1">Confirmed</div>
-                   <div className="sta891col sta891col-2">Tested</div>
-                   <div className="sta891col sta891col-3">Recovered</div>
-                   <div className="sta891col sta891col-4">Deceased</div>
-                   <div className="sta891col sta891col-5">Vaccinated</div>
+                  <div className="sta891Col sta891Col-0">States/UT</div>
+                   <div className="sta891Col sta891Col-1">Confirmed</div>
+                   <div className="sta891Col sta891Col-2">Tested</div>
+                   <div className="sta891Col sta891Col-3">Recovered</div>
+                   <div className="sta891Col sta891Col-4">Deceased</div>
+                   <div className="sta891Col sta891Col-5">Vaccinated</div>
                 </li>
           </div>
           
@@ -121,7 +121,7 @@ componentDidMount(){
 
          <div style={{marginLeft:"110px"}}>{this.statetableUI()}</div>
 
-          <h1 style={{textAlign:"center",color:"white"}}>{this.state.loading?"Please Wait...":""}</h1>
+          <h1 style={{textAlign:"center",color:"white"}}>{loading?"Please Wait...":""}</h1>
 			</>
          
 			)
@@ -133,7 +133,6 @@ componentDidMount(){
 
 
 //FUNTION TO SHOW DATA
-// <NumberFormat value={this.state.statedata[val].total.tested} displayType={'text'} thousandSeparator={true}/>
 
 statetableUI=()=>{
   const key=Object.keys(this.state.statedata)
@@ -146,22 +145,22 @@ statetableUI=()=>{
                         
           const reuseStatedata=this.state.statedata[val]
 
-          return <div className="hoverul">
+          return <Link to={"state/"+val} style={{textDecoration:"none"}}>
                     <ul>
-                    <div className="asd">
-                      <li className="sta891Statedata_table_row link dim black b shadow-5" style={{cursor:"pointer"}}>
+                   
+                      <li className="sta891Statedata_table_row  link dim black b shadow-5" style={{cursor:"pointer"}}>
                         
-                         <div className="sta891col   sta891col-0"><Link to={"state/"+val} style={{color:"#6c757d",textDecoration:"none"}}>{Statelist[val]}</Link></div>
-                         <div className="sta891col   sta891col-1"><NumberFormat value={reuseStatedata.total.confirmed} displayType={'text'} thousandSeparator={true}/></div>
-                         <div className="sta891col   sta891col-2"><NumberFormat value={reuseStatedata.total.tested} displayType={'text'} thousandSeparator={true}/></div>
-                         <div className="sta891col   sta891col-3"><NumberFormat value={reuseStatedata.total.recovered} displayType={'text'} thousandSeparator={true}/></div>
-                         <div className="sta891col   sta891col-4"><NumberFormat value={reuseStatedata.total.deceased} displayType={'text'} thousandSeparator={true}/></div>
-                         <div className="sta891col   sta891col-5"><NumberFormat value={reuseStatedata.total.vaccinated} displayType={'text'} thousandSeparator={true}/></div>                                                                  
+                         <div className="sta891Col   sta891Col-0">{State_List[val]}</div>
+                         <div className="sta891Col   sta891Col-1"><NumberFormat value={reuseStatedata.total.confirmed} displayType={'text'} thousandSeparator={true}/></div>
+                         <div className="sta891Col   sta891Col-2"><NumberFormat value={reuseStatedata.total.tested} displayType={'text'} thousandSeparator={true}/></div>
+                         <div className="sta891Col   sta891Col-3"><NumberFormat value={reuseStatedata.total.recovered} displayType={'text'} thousandSeparator={true}/></div>
+                         <div className="sta891Col   sta891Col-4"><NumberFormat value={reuseStatedata.total.deceased} displayType={'text'} thousandSeparator={true}/></div>
+                         <div className="sta891Col   sta891Col-5"><NumberFormat value={reuseStatedata.total.vaccinated} displayType={'text'} thousandSeparator={true}/></div>                                                                  
                         
                        </li>
-                       </div>
+                      
                    </ul>
-                 </div>
+                 </Link>
                                             
                   
       })} 
@@ -174,30 +173,23 @@ statetableUI=()=>{
 //FUNCTION to show search input
 
 filterInputUI=()=>{
-   const statearray=Object.keys(Statelist)
+   const statearray=Object.keys(State_List)
    
      const statemapping=statearray.filter((val,i)=>{
-     const value=Statelist[val]
+     const value=State_List[val]
      if(this.state.searchterm==""){
        return ;
      }
      else if(value.toLowerCase().includes(this.state.searchterm.toLowerCase())){
-       return (
-         <>value</>
-         )
+       return value;
+        
+         
 
      }
    }).map((val,i)=>{
            
-         return <Link to={"state/"+val} style={{color:"#6c757d",textDecoration:"none"}}><div className="sta891Box">
-                     
-                      
-                     {Statelist[val]}
-                     
-                    
-                      
-                     
-              
+         return <Link to={"state/"+val} style={{color:"white",textDecoration:"none"}}><div className="sta891Box">
+                  {State_List[val]}                                                                                                 
               </div></Link>
    })
    return(

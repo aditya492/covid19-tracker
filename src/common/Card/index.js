@@ -13,44 +13,44 @@ class Card extends Component{
 
 		return(
 			<>
-      <div className="sta891main001">
-			<div className="main">
+      
+			<div className="sta891CardMain">
 
               
-             <div className="c11card cardsprimary1 shadow-5">
-              <div className="cardmain01"><h2>Confirmed</h2></div>
-              <div className="cardmain01" style={{fontSize:"27px"}}><GiConfirmed/></div>
-             <div className="cardmain01"><h3 className="sta891card1"> <NumberFormat value={this.props.confirmed} displayType={'text'} thousandSeparator={true}></NumberFormat></h3></div>
+             <div className="sta891CommonInAll sta891pardsprimary1 shadow-5">
+              <div className="sta891InsideCard"><h2>Confirmed</h2></div>
+              <div className="sta891InsideCard" style={{fontSize:"27px"}}><GiConfirmed/></div>
+             <div className="sta891InsideCard"><h3 className="sta891card1"> <NumberFormat value={this.props.confirmed} displayType={'text'} thousandSeparator={true}></NumberFormat></h3></div>
             
 
              </div>
-             <div className="c11card cardsprimary2 shadow-5">
-              <div className="cardmain01"><h2 className="cpinfo">Tested</h2></div>
-               <div className="cardmain01" style={{fontSize:"27px"}}><GiHypodermicTest/></div>
-             <div className="cardmain01"><h3  className="sta891card2"> <NumberFormat value={this.props.tested} displayType={'text'} thousandSeparator={true}></NumberFormat></h3></div>
+             <div className="sta891CommonInAll sta891pardsprimary2 shadow-5">
+              <div className="sta891InsideCard"><h2 className="cpinfo">Tested</h2></div>
+               <div className="sta891InsideCard" style={{fontSize:"27px"}}><GiHypodermicTest/></div>
+             <div className="sta891InsideCard"><h3  className="sta891card2"> <NumberFormat value={this.props.tested} displayType={'text'} thousandSeparator={true}></NumberFormat></h3></div>
 
              </div>
-             <div className="c11card cardsprimary3 shadow-5">
-               <div className="cardmain01"> <h2 className="cpinfo">Deceased</h2></div>
-                <div className="cardmain01" style={{fontSize:"27px"}}><GiAbstract033/></div>
-             <div className="cardmain01"><h3  className="sta891card3"> <NumberFormat value={this.props.deceased} displayType={'text'} thousandSeparator={true}></NumberFormat></h3></div>
+             <div className="sta891CommonInAll sta891pardsprimary3 shadow-5">
+               <div className="sta891InsideCard"> <h2 className="cpinfo">Deceased</h2></div>
+                <div className="sta891InsideCard" style={{fontSize:"27px"}}><GiAbstract033/></div>
+             <div className="sta891InsideCard"><h3  className="sta891card3"> <NumberFormat value={this.props.deceased} displayType={'text'} thousandSeparator={true}></NumberFormat></h3></div>
             </div>
 
-             <div className="c11card cardsprimary4 shadow-5">
-            <div className="cardmain01"> <h2 className="cpinfo">Recovered</h2></div>
-              <div className="cardmain01" style={{fontSize:"27px"}}><RiDeviceRecoverLine/></div>
-              <div className="cardmain01"><h3  className="sta891card4"> <NumberFormat value={this.props.recovered} displayType={'text'} thousandSeparator={true}></NumberFormat></h3></div>
+             <div className="sta891CommonInAll sta891pardsprimary4 shadow-5">
+            <div className="sta891InsideCard"> <h2 className="cpinfo">Recovered</h2></div>
+              <div className="sta891InsideCard" style={{fontSize:"27px"}}><RiDeviceRecoverLine/></div>
+              <div className="sta891InsideCard"><h3  className="sta891card4"> <NumberFormat value={this.props.recovered} displayType={'text'} thousandSeparator={true}></NumberFormat></h3></div>
             </div>
 
-            <div className="c11card cardsprimary5 shadow-5">
-            <div className="cardmain01"> <h2 className="cpinfo">Vaccinated</h2></div>
-              <div className="cardmain01" style={{fontSize:"27px"}}><AiFillMedicineBox/></div>
-              <div className="cardmain01"><h3  className="sta891card5"> <NumberFormat value={this.props.vaccinated} displayType={'text'} thousandSeparator={true}></NumberFormat></h3></div>
+            <div className="sta891CommonInAll sta891pardsprimary5 shadow-5">
+            <div className="sta891InsideCard"> <h2 className="cpinfo">Vaccinated</h2></div>
+              <div className="sta891InsideCard" style={{fontSize:"27px"}}><AiFillMedicineBox/></div>
+              <div className="sta891InsideCard"><h3  className="sta891card5"> <NumberFormat value={this.props.vaccinated} displayType={'text'} thousandSeparator={true}></NumberFormat></h3></div>
             </div>
             
                
              </div>
-             </div>
+            
 			</>
 			)
 

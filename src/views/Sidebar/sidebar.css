@@ -1,10 +1,11 @@
-.navbar{
+.sta891Navbar{
 	
 	height: 80px;
     display: flex;
     justify-content: start;
     align-items: center;
-    margin-top: 12px;
+    margin-top: 39px;
+    background:#1e1e30;	
 }
 .menu-bars{
 margin-left:2rem;
@@ -25,7 +26,7 @@ background:none;
 }
 .nav-menu.active{
 	left:0;
-	transition: 500ms;
+	transition: 1000ms;
 }
 
 .nav-text{
@@ -45,14 +46,17 @@ height: 60px;
 	display: flex;
 	justify-content: start;
 	font-weight: bold;
-	top:0;	
- }
- .navt:hover{
- 	background-color: #1a83ff;
- }
+	top:0;
+	background:#060b26
 
- .nav-menu-item{
+ }
+ /*.navt:hover{
+ 	background-color: #1a83ff;
+ }*/
+
+ .nav-menu-items{
  	width:100%;
+ 	background:#060b26;
  }
  .navbar-toggle{
  	
@@ -63,9 +67,10 @@ height: 60px;
  	align-items: center;
  	font-size: 30px;
  	color:#fff;
+ 	background: #060b26;
  }
 
- .nav{
+ .sta891Nav{
     flex-direction: column;
     height: 100%;
     justify-content: flex-start;
@@ -73,6 +78,7 @@ height: 60px;
     position: fixed;
     z-index: 999;
     top:82px;
-    
+    background:#1e1e30;	
+    top:0;
 }
 

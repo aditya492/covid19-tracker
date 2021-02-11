@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import {Link} from "react-router-dom";
 import {FaBars,FaGithub,FaHackerrank,FaLinkedinIn,FaInstagram} from "react-icons/fa";
 import {AiOutlineClose,AiOutlineHome} from 'react-icons/ai';
-import Statelist from '../../utils/Statelist';
+import State_List from '../../helper/Statelist';
 import './sidebar.css';
 import 'tachyons';
 
@@ -18,49 +18,65 @@ class  Sidebar extends Component{
 
 	render(){
    
-       const key=Object.keys(Statelist)
+       
+       const showsidebar=()=>{
+       
+      this.setState(prevState=>({
+                 sidebar:!prevState.sidebar,
+      }))
+      console.log(this.state.sidebar)
+      
+  }
    
 	return(
 		<>
-    <div className="nav shadow-5">
-		
-    <div className="navbar">
-      <Link to="/" className="menu-bars" style={{color:"white"}}>
-      <AiOutlineHome/>
+    <div className="sta891Nav shadow-5">
+
+     <div className="sta891Navbar">
+      <Link to="#" className="menu-bars" style={{color:"white"}}>
+      <FaBars style={{background:"#1e1e30"}} onClick={showsidebar}/>
       </Link>
      
     </div>
+
+
+    
+    <div className="sta891Navbar">
+      <Link to="/" className="menu-bars" style={{color:"white"}}>
+      <AiOutlineHome style={{background:"#1e1e30"}}/>
+      </Link>
+     
+    </div>
+
+
      
 
-    <div className="navbar">
+    <div className="sta891Navbar">
       <a href="https://github.com/aditya492" target="_blank" className="menu-bars" style={{color:"white"}}>
-      <FaGithub/>
+      <FaGithub style={{background:"#1e1e30"}}/>
       </a>  
     </div>
 
-    <div className="navbar">
+    <div className="sta891Navbar">
       <a href="https://www.hackerrank.com/adityabarve96" target="_blank" className="menu-bars" style={{color:"white"}}>
-      <FaHackerrank/>
+      <FaHackerrank style={{background:"#1e1e30"}}/>
       </a>  
     </div>
 
-    <div className="navbar">
+    <div className="sta891Navbar">
       <a href="https://www.linkedin.com/in/aditya-barve-52002115b/" target="_blank" className="menu-bars" style={{color:"white"}}>
-      <FaLinkedinIn/>
+      <FaLinkedinIn style={{background:"#1e1e30"}}/>
       </a>  
     </div>
 
-    <div className="navbar">
-      <a href="https://www.instagram.com/adiityabarve/" target="_blank" className="menu-bars" style={{color:"white"}}>
-      <FaInstagram/>
-      </a>  
-    </div>
+   
+    
 
      <nav className={this.state.sidebar ? "nav-menu active":"nav-menu"}>
-	   <ul className="nav-menu-items"  onClick={this.showsidebar} >
+	   <ul className="nav-menu-items"  onClick={showsidebar} >
           <li className="navbar-toggle">
              <Link to="#">
-             <AiOutlineClose/>
+             <AiOutlineClose style={{background:"#1e1e30"}}/>
              </Link> 
           </li>
              {this.sideinput()}
@@ -71,29 +87,17 @@ class  Sidebar extends Component{
 		)
 }
 
-showsidebar=()=>{
-     	
-			this.setState(prevState=>({
-                 sidebar:!prevState.sidebar,
-			}))
-			console.log(this.state.sidebar)
-			
-	}
+ 
 
 sideinput=()=>{
 
-	const key=Object.keys(Statelist)
+	const key=Object.keys(State_List)
 
     return(
     <>
-	{key.map((item,index)=>{
-		  const value=Statelist[item]
-          	return   <li key={index}>
-          		
-          		     <Link to={"/state/"+item} className="navt"><FaBars/> {value}</Link>
-          		
-          		     </li>         	         	
-          })}
+    <div className="navt">
+	   <Link to="/"> <h1 style={{background: "#060b26",color:"white",textDecoration:"none"}}>Home</h1></Link>
+     </div>
     </>
 )
 }

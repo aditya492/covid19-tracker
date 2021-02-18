@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 import NumberFormat from 'react-number-format';
 import axios from  'axios';
+import {BeatLoader} from 'react-spinners';
 
 import Card from '../../common/Card';
 
@@ -11,6 +12,10 @@ import getCovidData from '../../utils/Storage';
 
 import 'tachyons';
 import './district.css';
+
+import  {connect } from 'react-redux';      
+import  {fetchStart} from '../../store/actions';
+
 
 import Sidebar from '../Sidebar'
 
@@ -25,11 +30,14 @@ class District extends Component{
             error:false,
             statedata:[],
             searchterm:'',
+
       }
     }
 
   componentDidMount(){
      
+    this.props.fetchStart()
+
       getCovidData()
      .then(res=>{
                   
@@ -49,8 +57,12 @@ class District extends Component{
    
    
 
-	render(){   
+	render(){  
 
+
+  console.log("distr data",this.props.covidData.loading) 
+  const loadingg=this.props.covidData.loading
+  const reduxData=this.props.covidData.data
        const{
              error,
              arr,
@@ -60,11 +72,11 @@ class District extends Component{
           const reuseMatchid= this.props.match.params.id 
       
 
-          const confirmed=loading ? null:arr[reuseMatchid].total.confirmed;
-          const recovered=loading ? null:arr[reuseMatchid].total.recovered;
-          const deceased=loading ? null:arr[reuseMatchid].total.deceased;
-          const tested=loading ? null:arr[reuseMatchid].total.tested;
-          const vaccinated=loading ? null:arr[reuseMatchid].total.vaccinated; 
+          const confirmed=loadingg ?null:reduxData[reuseMatchid].total.confirmed;
+          const recovered=loadingg ? null:reduxData[reuseMatchid].total.recovered;
+          const deceased=loadingg ? null:reduxData[reuseMatchid].total.deceased;
+          const tested=loadingg ? null:reduxData[reuseMatchid].total.tested;
+          const vaccinated=loadingg ? null:reduxData[reuseMatchid].total.vaccinated; 
           
     
       if(!error){
@@ -126,23 +138,25 @@ class District extends Component{
    
    const matchID=this.props.match.params.id
   
-   const match=this.state.arr[matchID]
+   const match=this.props.covidData.data[matchID]
 
    const districtKeys=Object.keys(match.districts)
    
   
+  
+  
   return(
      <>
      
-     {districtKeys.map((val,i)=>{ 
+    {districtKeys.map((val,i)=>{ 
 
-                            
+                  
        const reuseDistrictMatch=match.districts[val].total
                  
        return <div style={{marginLeft:"110px"}}>
                     <ul className="sta891responsive-table">
                       <li className="sta891Statedata_table_row link dim black b shadow-5" >                         
-                         <div className="sta891Col  sta891Col-0">{val}</div> 
+                         <div className="sta891Col  sta891Col-0">{val}</div>
                          <div className="sta891Col  sta891Col-1">{isNaN(reuseDistrictMatch.confirmed) ? "N/A" : <NumberFormat value={reuseDistrictMatch.confirmed} displayType={'text'} thousandSeparator={true}/>}</div>
                          <div className="sta891Col  sta891Col-2">{isNaN(reuseDistrictMatch.tested)    ? "N/A" : <NumberFormat value={reuseDistrictMatch.tested} displayType={'text'} thousandSeparator={true}/>}</div>
                          <div className="sta891Col  sta891Col-3">{isNaN(reuseDistrictMatch.recovered) ? "N/A" : <NumberFormat value={reuseDistrictMatch.recovered} displayType={'text'} thousandSeparator={true}/>}</div> 
@@ -189,4 +203,12 @@ filterInputUI=()=>{
 }
 
 }
-export default District;
+
+
+
+
+const mapStateToProps=state=>{
+  return {covidData:state.covidData};
+}
+
+export default connect(mapStateToProps,{fetchStart})(District);

@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import NumberFormat from 'react-number-format';
+import {BeatLoader} from 'react-spinners';
 
 import './home.css';
 
@@ -18,6 +19,11 @@ import {AiFillMedicineBox} from "react-icons/ai";
 import {FcCalendar} from "react-icons/fc";
 import {FaArrowAltCircleRight} from "react-icons/fa";
 import {GiHypodermicTest,GiConfirmed,GiAbstract033} from "react-icons/gi";
+
+import  {connect } from 'react-redux';      //redux part
+import  {fetchStart} from '../../store/actions';
+
+
 import 'tachyons';
 
 import State_List from '../../helper/Statelist';
@@ -44,6 +50,9 @@ componentDidMount(){
        loading:true,
      })
 
+
+       this.props.fetchStart()
+
      getCovidData()
      .then(res=>{
        
@@ -51,11 +60,11 @@ componentDidMount(){
           this.setState({
            statedata:res.data,
            loading:false,
-           confirmed:result.confirmed,
-           tested:result.tested,
-           deceased:result.deceased,          
-           recover:result.recover,
-           vaccinated:result.vaccinated,
+           // confirmed:result.confirmed,
+           // tested:result.tested,
+           // deceased:result.deceased,          
+           // recover:result.recover,
+           // vaccinated:result.vaccinated,
          })
              
 
@@ -65,48 +74,56 @@ componentDidMount(){
            error:true,
          })
      })
-
-
   }
-
+   
 	render(){
-    
-      const{confirmed,
-             recover,
-             tested,
-             deceased,
-             vaccinated,
+   
+     
+     
+     
+
+      console.log("loading",this.props.covidData);
+
+       const{//confirmed,
+      //        recover,
+      //        tested,
+      //        deceased,
+      //        vaccinated,
              error,
              loading,
              statedata,
         } =this.state;
 
-      
+        const reduxData=this.props.covidData
+       
+       
 
-    if(!error){ 
+    
+    if(!reduxData.error){ 
 		return(
 			<>
 
          
 			 <h1 className="sta891MainH1"> <GoAlert/> Corona Outbreak!!! <GoAlert/></h1><span className="sta891MainSpan sta891MainH1 ">Let's Check Data!!</span>
 			  <Sidebar/>
+
         <div style={{backgroundColor:"gainsboro",marginTop:"12px"}}>
           <h2 className="sta891HomeIndia">India</h2>
-         </div>
-         <div className="sta891main001">
-			   <Card
-            confirmed={confirmed}
-            tested={tested}
-            deceased={deceased}
-            recovered={recover}
-            vaccinated={vaccinated}
-         />
-        
+        </div>
 
-              		    
-       </div>
-     
+      <div className="sta891main001">
+			   {reduxData.loading ? <h1 style={{textAlign:"center",color:"white"}}><BeatLoader color='white'/></h1> : <Card
+            confirmed={reduxData.confirmed}
+            tested={reduxData.tested}
+            deceased={reduxData.deceased}
+            recovered={reduxData.recovered}
+            vaccinated={reduxData.vaccinated}
+         />}                    		    
+      </div>
+        
          <StateSearchBar/>
+
+
 
         <div className="sta891CurrentDate"><FcCalendar style={{fontSize:"25px"}}/><span>{this.currentdate()}</span></div>
 
@@ -115,7 +132,7 @@ componentDidMount(){
           <div className="sta891color_State_body">
 
                 <li className="sta891Table_Header_ ">
-                  <div className="sta891Col sta891Col-0">States/UT</div>
+                  <div className="sta891Col sta891Col-0" >States/UT</div>
                    <div className="sta891Col sta891Col-1">Confirmed</div>
                    <div className="sta891Col sta891Col-2">Tested</div>
                    <div className="sta891Col sta891Col-3">Recovered</div>
@@ -126,9 +143,11 @@ componentDidMount(){
           
           
 
-         <div style={{marginLeft:"110px"}}>{this.statetableUI()}</div>
+         <div style={{marginLeft:"110px"}}>{this.getStateTableUI()}</div>
 
           <h1 style={{textAlign:"center",color:"white"}}>{loading?"Please Wait...":""}</h1>
+
+          
 			</>
          
 			)
@@ -139,20 +158,25 @@ componentDidMount(){
 	}
 
 
+
+
 //FUNTION TO SHOW DATA
 
-statetableUI=()=>{
+ getStateTableUI=()=>{
+ 
+
+
+   console.log("ssttableui",this.props.covidData);
   const {statedata}=this.state
-  const key=Object.keys(statedata)
+  const key=Object.keys(this.props.covidData.data)
     
   return(
      <>
-    
-     {key.map((val,i)=>{
+      
+     {this.props.covidData.loading ? <h1 style={{textAlign:"center"}}><BeatLoader color='white'/></h1> : key.map((val,i)=>{ //change key variable
 
-                        
-          const reuseStatedata=statedata[val]
-
+          const reuseStatedata=this.props.covidData.data[val]
+          console.log("aaa",reuseStatedata.districts)
           return <Link to={"state/"+val} style={{textDecoration:"none"}}>
                     <ul>
                    
@@ -226,4 +250,10 @@ const finalDate=(`${date}-${month}-${year}`);
 
 }
 
-export default Home;
+// export default Home;
+
+const mapStateToProps=state=>{
+  return {covidData:state.covidData};
+}
+
+export default connect(mapStateToProps,{fetchStart})(Home);

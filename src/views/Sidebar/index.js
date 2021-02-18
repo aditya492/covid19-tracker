@@ -28,7 +28,7 @@ class  Sidebar extends Component{
       
   }
    
-	return(
+	return(  //make different function
 		<>
     <div className="sta891Nav shadow-5">
 
@@ -57,11 +57,13 @@ class  Sidebar extends Component{
       </a>  
     </div>
 
+
     <div className="sta891Navbar">
       <a href="https://www.hackerrank.com/adityabarve96" target="_blank" className="menu-bars" style={{color:"white"}}>
       <FaHackerrank style={{background:"#1e1e30"}}/>
       </a>  
     </div>
+    
 
     <div className="sta891Navbar">
       <a href="https://www.linkedin.com/in/aditya-barve-52002115b/" target="_blank" className="menu-bars" style={{color:"white"}}>
@@ -72,7 +74,7 @@ class  Sidebar extends Component{
    
     
 
-     <nav className={this.state.sidebar ? "nav-menu active":"nav-menu"}>
+     <nav className={this.state.sidebar ? "nav-menu active":"nav-menu"}>   //change classname
 	   <ul className="nav-menu-items"  onClick={showsidebar} >
           <li className="navbar-toggle">
              <Link to="#">

@@ -4,6 +4,11 @@ margin: 0px;
 padding: 0px;
 background:#161625;
 }
+.sta891VaccineStatus{
+  text-align: center;
+  color: green;
+    font-family: 'Roboto';
+}
 
 .sta891stateInput{
     margin: auto;

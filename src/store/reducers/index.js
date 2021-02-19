@@ -25,7 +25,7 @@ const mainreducer=(state=myState,action)=>{
   	case 'FETCH_SUCCESS':
   	const result=Calculatedata(action.payload) 
   	return{
-  		  ...state,
+  		  
   		  loading:false,
   		  data:action.payload,
           confirmed:result.confirmed,

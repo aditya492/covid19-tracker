@@ -1,9 +1,5 @@
 import axios from 'axios';
-
-
-const FETCH_REQUEST='FETCH_REQUEST';
-const FETCH_SUCCESS='FETCH_SUCCESS';
-const ERROR='ERROR';
+import{FETCH_REQUEST,FETCH_SUCCESS,ERROR} from '../actioncreator'
 
 
 

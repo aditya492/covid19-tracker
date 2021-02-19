@@ -35,24 +35,9 @@ class District extends Component{
     }
 
   componentDidMount(){
-     
-    this.props.fetchStart()
-
-      getCovidData()
-     .then(res=>{
-                  
-          this.setState({
-          arr:res.data,
-          loading:false,
-                 
-         })  
-                
-     })
-     .catch((e)=>{
-       this.setState({
-         error:true,
-       })
-     })
+    
+   const checkData=this.props.fetchStart() ? null : this.props.fetchStart()   
+    
   }
    
    
@@ -79,7 +64,7 @@ class District extends Component{
           const vaccinated=loadingg ? null:reduxData[reuseMatchid].total.vaccinated; 
           
     
-      if(!error){
+      if(!reduxData.error){
   		return(
 			<>
 			        <Sidebar/>
@@ -100,7 +85,7 @@ class District extends Component{
             <input className="sta891stateInput shadow-5" onChange={(e)=>this.inputHandler(e)} placeholder="&#128269; Enter Your State here" style={{color: "white"}}></input> 
               
               <div className="sta891SearchResult">
-                 <div className="sta891SearchResult"><h3 className="sta891ResultsRow">{loading ? <h1 style={{textAlign:"center",color:"white"}}>Loading....</h1>: this.filterInputUI()}</h3></div>            
+                 <div className="sta891SearchResult"><h3 className="sta891ResultsRow">{loadingg ?  <h1 style={{textAlign:"center",color:"white"}}><BeatLoader color='white'/></h1>: this.filterInputUI()}</h3></div>            
               </div>
                    
         </div> 
@@ -116,7 +101,7 @@ class District extends Component{
                   
                 </li>
           </div>
-          {loading ? <h1 style={{textAlign:"center",color:"white"}}>Loading....</h1>:this.getDistrictUI()}
+          {loadingg ? null :this.getDistrictUI()}
          
 			</>
 			)

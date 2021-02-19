@@ -36,68 +36,41 @@ class Home extends Component{
 	constructor(props){
        super(props);
        this.state={
-       	    statedata:[],
-       	    loading:false,
-       	    searchterm:'',
-            error:false,                      
+       	    noti:[],                      
        }
 	}
 
       
       
 componentDidMount(){
-     this.setState({
-       loading:true,
-     })
+     
+           this.props.fetchStart()
 
-
-       this.props.fetchStart()
-
-     getCovidData()
-     .then(res=>{
-       
-      const result=Calculatedata(res.data)
-          this.setState({
-           statedata:res.data,
-           loading:false,
-           // confirmed:result.confirmed,
-           // tested:result.tested,
-           // deceased:result.deceased,          
-           // recover:result.recover,
-           // vaccinated:result.vaccinated,
-         })
-             
-
-     })
-     .catch((e)=>{      
-         this.setState({
-           error:true,
-         })
-     })
+           axios.get("https://api.covid19india.org/updatelog/log.json")
+           .then(res=>{
+             this.setState({
+               noti:res.data
+             })
+            
+           })
   }
    
 	render(){
    
+     const{noti}=this.state
      
-     
-     
+     console.log("props",this.props)
 
       console.log("loading",this.props.covidData);
 
-       const{//confirmed,
-      //        recover,
-      //        tested,
-      //        deceased,
-      //        vaccinated,
-             error,
-             loading,
-             statedata,
-        } =this.state;
-
+      
         const reduxData=this.props.covidData
        
-       
+       console.log("notific.",noti)
 
+    const mapp=noti.map(item=>{
+        return <li>{item.update}</li>
+    })
     
     if(!reduxData.error){ 
 		return(
@@ -123,7 +96,7 @@ componentDidMount(){
         
          <StateSearchBar/>
 
-
+        
 
         <div className="sta891CurrentDate"><FcCalendar style={{fontSize:"25px"}}/><span>{this.currentdate()}</span></div>
 
@@ -145,7 +118,7 @@ componentDidMount(){
 
          <div style={{marginLeft:"110px"}}>{this.getStateTableUI()}</div>
 
-          <h1 style={{textAlign:"center",color:"white"}}>{loading?"Please Wait...":""}</h1>
+          
 
           
 			</>
@@ -165,17 +138,17 @@ componentDidMount(){
  getStateTableUI=()=>{
  
 
-
-   console.log("ssttableui",this.props.covidData);
+   const reduxData=this.props.covidData.data
+  
   const {statedata}=this.state
-  const key=Object.keys(this.props.covidData.data)
+  const key=Object.keys(reduxData)
     
   return(
      <>
       
      {this.props.covidData.loading ? <h1 style={{textAlign:"center"}}><BeatLoader color='white'/></h1> : key.map((val,i)=>{ //change key variable
 
-          const reuseStatedata=this.props.covidData.data[val]
+          const reuseStatedata=reduxData[val]
           console.log("aaa",reuseStatedata.districts)
           return <Link to={"state/"+val} style={{textDecoration:"none"}}>
                     <ul>

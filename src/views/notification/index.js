@@ -2,9 +2,14 @@ import React,{Component} from 'react';
 import {GrNotification} from "react-icons/gr";
 import {IoIosNotifications} from "react-icons/io";
 import axios from 'axios';
+
 import './notification.css';
+import Time from '../../helper/Time';
+
 import  {connect } from 'react-redux';      //redux part
 import  {fetchNotiData} from '../../store/actions/NotificationAction';
+
+
 class Notification extends Component{
 constructor(props){
 super(props);
@@ -52,13 +57,21 @@ return(
    <>
 
    {this.props.NotiData.loading ? null : reduxData.slice(0).reverse().map(item=>{
+
+   const notificationTimestamp = Time(item.timestamp*1000);
+
    const date=new Date(item.timestamp*1000)
-   const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date);
+
    const month = new Intl.DateTimeFormat('en', { month: 'short' }).format(date);
+
    const dates = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date);
+
    const finalDate=(`${dates} ${month}`);
-   return (<><div className="mapL"><li className="Maplist">{finalDate}</li></div>
+
+   return (<><div className="mapL"><li className="Maplist">{finalDate}</li> <br/> {notificationTimestamp} ago</div>
+        
        <div className="mapD"><li className="MaplistD">{item.update}</li></div></>)
+
 })}
 
 </>

@@ -1,5 +1,6 @@
 const initial={
 	            data:{},
+	            loading:true,
 	           
 }
 

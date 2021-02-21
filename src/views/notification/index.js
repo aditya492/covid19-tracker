@@ -14,48 +14,60 @@ noti:{},
 loading:true
 }
 }
-componentDidMount() {
-this.props.fetchNotiData()
-axios.get("https://api.covid19india.org/updatelog/log.json")
-.then(res => {
-this.setState({
-noti: res.data,
-loading: false,
-})
-})
-}
+
+   componentDidMount() {
+          this.props.fetchNotiData()
+
+      }
+
+
 render(){
+
+    console.log("Notidata",this.props.NotiData.data.data)
+
 return(
+
 <>
-<div className="sta891NotificationBell" onClick={()=>this.showNoti()}><IoIosNotifications style={{color:"white",fontSize:"30px"}}/></div>
+<div className="sta891NotificationBell" onClick={()=>this.showNoti()}><IoIosNotifications style={{color:"white",fontSize:"39px"}}/></div>
 <div className={this.state.toggle ?  "notimain" : "notimainon" }>{this.mapNotiData()}</div>
 </>
 )
 }
-showNoti=()=>{
-this.setState(prev=>({
-toggle:!prev.toggle,
+
+
+
+  showNoti=()=>{
+    this.setState(prev=>({
+    toggle:!prev.toggle,
 }))
-console.log(this.state.toggle)
+    console.log(this.state.toggle)
 }
-mapNotiData=()=>{
-const  mainData=this.state.noti
-return(
-<>
-{this.state.loading ?null :this.state.noti.slice(0).reverse().map(item=>{
-const date=new Date(item.timestamp*1000)
-const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date);
-const month = new Intl.DateTimeFormat('en', { month: 'short' }).format(date);
-const dates = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date);
-const finalDate=(`${dates} ${month}`);
-return (<><div className="mapL"><li className="Maplist">{finalDate}</li></div>
+
+
+  mapNotiData=()=>{
+
+    const  reduxData=this.props.NotiData.data.data
+
+   return(
+   <>
+
+   {this.props.NotiData.loading ? null : reduxData.slice(0).reverse().map(item=>{
+   const date=new Date(item.timestamp*1000)
+   const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date);
+   const month = new Intl.DateTimeFormat('en', { month: 'short' }).format(date);
+   const dates = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date);
+   const finalDate=(`${dates} ${month}`);
+   return (<><div className="mapL"><li className="Maplist">{finalDate}</li></div>
        <div className="mapD"><li className="MaplistD">{item.update}</li></div></>)
 })}
+
 </>
 )
 }
 }
+
 const mapStateToProps=(state)=>{
 return {NotiData:state.NotiData}
 }
+
 export  default connect(mapStateToProps,{fetchNotiData})(Notification);

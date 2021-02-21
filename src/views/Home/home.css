@@ -88,16 +88,19 @@ color:black;
     display: flex;
     justify-content: center;
     color: sandybrown;
+    margin-left: 67px;
 }
 .sta891SearchResult{
   position: relative;
   width: 100%;
   z-index:10;
   font-family: 'Roboto';
+
 }
 .sta891ResultsRow{
   position: absolute;
   width: 100%;
+ 
 }
 .sta891TableRow{
 	  display: flex;

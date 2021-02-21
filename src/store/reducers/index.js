@@ -1,6 +1,6 @@
 import Calculatedata from '../../utils/Calculatedata'
 const myState={
-	  confirmed:0,
+	        confirmed:0,
           recovered:0,
           deceased:0,
           tested:0,
@@ -26,8 +26,8 @@ const mainreducer=(state=myState,action)=>{
   	const result=Calculatedata(action.payload) 
   	return{
   		  
-  		  loading:false,
-  		  data:action.payload,
+  		    loading:false,
+  		    data:action.payload,
           confirmed:result.confirmed,
           recovered:result.recover,
           deceased:result.deceased,

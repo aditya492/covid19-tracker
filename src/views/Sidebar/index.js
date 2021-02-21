@@ -92,9 +92,6 @@ class  Sidebar extends Component{
  
 
 sideinput=()=>{
-
-	const key=Object.keys(State_List)
-
     return(
     <>
     <div className="navt">

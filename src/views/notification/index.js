@@ -34,7 +34,7 @@ return(
 
 <>
 <div className="sta891NotificationBell" onClick={()=>this.showNoti()}><IoIosNotifications style={{color:"white",fontSize:"39px"}}/></div>
-<div className={this.state.toggle ?  "notimain" : "notimainon" }>{this.mapNotiData()}</div>
+<div className={this.state.toggle ?  "sta891NotiMain" : "sta891NotiMainOn" }>{this.mapNotiData()}</div>
 </>
 )
 }
@@ -68,9 +68,9 @@ return(
 
    const finalDate=(`${dates} ${month}`);
 
-   return (<><div className="mapL"><li className="Maplist">{finalDate}</li> <br/> {notificationTimestamp} ago</div>
+   return (<><div className="sta891mapListOut"><li className="sta891MapListIn">{finalDate}</li> <br/> {notificationTimestamp} ago</div>
         
-       <div className="mapD"><li className="MaplistD">{item.update}</li></div></>)
+       <div className="sta891MapDivOuter"><li className="sta891MaplistInner">{item.update}</li></div></>)
 
 })}
 

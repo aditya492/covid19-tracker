@@ -8,7 +8,7 @@
     cursor: pointer;
 }
 
-.notimain{
+.sta891NotiMain{
 width: 400px;
     position: absolute;
     left: 1034px;
@@ -24,7 +24,7 @@ width: 400px;
     height: 68vh;
 }
    
-.notimainon{
+.sta891NotiMainOn{
        left: 100%;
     width: 400px;
     position: fixed;
@@ -35,13 +35,13 @@ width: 400px;
     overflow-y: scroll;
     height: 68vh;
 }
-.Maplist{
+.sta891MapListIn{
 	background:white;
 	padding:0px;
 	margin:0px;
 	font-family: Roboto;
 }
-.MaplistD{
+.sta891MaplistInner{
 	    background: white;
     padding: 7px;
     font-family: Roboto;
@@ -49,14 +49,14 @@ width: 400px;
     background:lavender;
 }
 
-.mapD{
+.sta891MapDivOuter{
 	background: lavender;
 	    border-bottom: 2px solid black;
 	    font-weight: 600;
 	    border-radius: 12px;
 }
 
-.mapL{
+.sta891mapListOut{
     display: flex;
     background: bottom;
     margin-left: 19px;

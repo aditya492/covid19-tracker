@@ -3,12 +3,17 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 import NumberFormat from 'react-number-format';
 import {BeatLoader} from 'react-spinners';
+
 import './home.css';
+
 import Notification from '../notification';
+
 import Card from '../../common/Card'
 import StateSearchBar from '../../common/StateSearchBar';
+
 import Calculatedata from '../../utils/Calculatedata';
 import getCovidData from '../../utils/Storage';
+
 import {BsSearch} from "react-icons/bs";
 import {GoAlert} from "react-icons/go";
 import {RiDeviceRecoverLine} from "react-icons/ri";
@@ -16,11 +21,15 @@ import {AiFillMedicineBox} from "react-icons/ai";
 import {FcCalendar} from "react-icons/fc";
 import {FaArrowAltCircleRight} from "react-icons/fa";
 import {GiHypodermicTest,GiConfirmed,GiAbstract033} from "react-icons/gi";
+
 import  {connect } from 'react-redux';      //redux part
 import  {fetchStart} from '../../store/actions';
+
 import 'tachyons';
 import State_List from '../../helper/Statelist';
 import Sidebar from '../Sidebar'
+
+
 class Home extends Component{
 constructor(props){
 super(props);

@@ -51,32 +51,3 @@ const mainreducer=(state=myState,action)=>{
 export default mainreducer;
 
 
-
-//BACKUP CODE
-
-// import Calculatedata from '../../utils/Calculatedata'
-
-// const mainreducer=(state={},action)=>{
-
-//   switch(action.type){
-//   	case 'FETCH_START':
-//   	const result=Calculatedata(action.payload) 
-//   	return{loading:false,
-//   		  data:action.payload,
-//           confirmed:result.confirmed,
-//           recovered:result.recover,
-//           deceased:result.deceased,
-//           tested:result.tested,
-//           vaccinated:result.vaccinated,
-//   	};
- 
-    
-   
-
-//   	default:
-//   	return state;
-//   }
-  
-// };
-
-// export default mainreducer;

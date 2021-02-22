@@ -1,6 +1,11 @@
+
+//For Home Page(State Data) API
+ 
 export const FETCH_REQUEST='FETCH_REQUEST';
 export const FETCH_SUCCESS='FETCH_SUCCESS';
 export const ERROR='ERROR';
+
+//For Notifications API
 
 export const FETCH_NOTIFICATION_REQ='FETCH_NOTIFICATION_REQ';
 export const FETCH_NOTIFICATION_SUCCESS='FETCH_NOTIFICATION_SUCCESS';

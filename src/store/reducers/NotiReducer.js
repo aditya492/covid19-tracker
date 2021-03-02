@@ -4,8 +4,6 @@ const initial={
 	           
 }
 
-
-
 const NotiReducer=(state=initial,action)=>{
   
   switch(action.type){

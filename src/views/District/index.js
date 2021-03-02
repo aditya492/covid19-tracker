@@ -1,23 +1,23 @@
 import React,{Component} from 'react';
+import  {connect } from 'react-redux';      
+import  {fetchStart,sortAsc} from '../../store/actions';
 import {Link} from 'react-router-dom';
 import NumberFormat from 'react-number-format';
 import axios from  'axios';
 import {BeatLoader} from 'react-spinners';
 
-import Card from '../../common/Card';
 
 import State_List from '../../helper/Statelist';
-
 import getCovidData from '../../utils/Storage';
+
+
+import Card from '../../common/Card';
+
+import Sidebar from '../Sidebar'
 
 import 'tachyons';
 import './district.css';
 
-import  {connect } from 'react-redux';      
-import  {fetchStart} from '../../store/actions';
-
-
-import Sidebar from '../Sidebar'
 
 
 
@@ -45,9 +45,11 @@ class District extends Component{
 	render(){  
 
 
-  console.log("distr data",this.props.covidData.loading) 
+ 
   const loadingg=this.props.covidData.loading
-  const reduxData=this.props.covidData.data
+  const reduxData=this.props.covidData
+  const cardData=this.props.covidData.dataObject
+
        const{
              error,
              arr,
@@ -57,11 +59,11 @@ class District extends Component{
           const reuseMatchid= this.props.match.params.id 
       
 
-          const confirmed=loadingg ?null:reduxData[reuseMatchid].total.confirmed;
-          const recovered=loadingg ? null:reduxData[reuseMatchid].total.recovered;
-          const deceased=loadingg ? null:reduxData[reuseMatchid].total.deceased;
-          const tested=loadingg ? null:reduxData[reuseMatchid].total.tested;
-          const vaccinated=loadingg ? null:reduxData[reuseMatchid].total.vaccinated; 
+          const confirmed=loadingg ?null:cardData[reuseMatchid].total.confirmed;
+          const recovered=loadingg ? null:cardData[reuseMatchid].total.recovered;
+          const deceased=loadingg ? null:cardData[reuseMatchid].total.deceased;
+          const tested=loadingg ? null:cardData[reuseMatchid].total.tested;
+          const vaccinated=loadingg ? null:cardData[reuseMatchid].total.vaccinated; 
           
     
       if(!reduxData.error){
@@ -69,16 +71,16 @@ class District extends Component{
 			<>
 			        <Sidebar/>
              <h1 className="sta891Cardh1C1">{State_List[this.props.match.params.id]}</h1>
-              
-              
-               
-               <Card
+         
+                <Card
                 confirmed={confirmed}
                 recovered={recovered}
                 tested={tested}
                 deceased={deceased}
                 vaccinated={vaccinated}         
-               />
+               />     
+          
+             
 
         <div className="sta891Statediv28">
             
@@ -122,26 +124,22 @@ class District extends Component{
  getDistrictUI=()=>{
    
    const matchID=this.props.match.params.id
-  
-   const match=this.props.covidData.data[matchID]
-
-   const districtKeys=Object.keys(match.districts)
-   
-  
-  
+ 
+   const districtKeys=Object.keys(this.props.covidData.dataObject[matchID].districts)
   
   return(
      <>
      
-    {districtKeys.map((val,i)=>{ 
+    {districtKeys.map((item,i)=>{ 
+                         
+       const reuseDistrictMatch=this.props.covidData.dataObject[matchID].districts[item].total
+     
+      
 
-                  
-       const reuseDistrictMatch=match.districts[val].total
-                 
        return <div style={{marginLeft:"110px"}}>
                     <ul className="sta891responsive-table">
                       <li className="sta891Statedata_table_row link dim black b shadow-5" >                         
-                         <div className="sta891Col  sta891Col-0">{val}</div>
+                         <div className="sta891Col  sta891Col-0">{item}</div>
                          <div className="sta891Col  sta891Col-1">{isNaN(reuseDistrictMatch.confirmed) ? "N/A" : <NumberFormat value={reuseDistrictMatch.confirmed} displayType={'text'} thousandSeparator={true}/>}</div>
                          <div className="sta891Col  sta891Col-2">{isNaN(reuseDistrictMatch.tested)    ? "N/A" : <NumberFormat value={reuseDistrictMatch.tested} displayType={'text'} thousandSeparator={true}/>}</div>
                          <div className="sta891Col  sta891Col-3">{isNaN(reuseDistrictMatch.recovered) ? "N/A" : <NumberFormat value={reuseDistrictMatch.recovered} displayType={'text'} thousandSeparator={true}/>}</div> 
@@ -151,7 +149,7 @@ class District extends Component{
                     </ul>
                </div>
       })} 
-     </>  
+    </>  
   )
 }
 
@@ -196,4 +194,53 @@ const mapStateToProps=state=>{
   return {covidData:state.covidData};
 }
 
-export default connect(mapStateToProps,{fetchStart})(District);
+
+const mapDispatchToProps=(dispatch)=>{
+  return{
+   
+    fetchStart:()=>dispatch(fetchStart()),
+    sortconf:(final,id)=>dispatch(sortAsc(final,id))
+  }
+}
+
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(District);
+
+
+
+
+
+
+
+// getDistrictUI=()=>{
+   
+//    const matchID=this.props.match.params.id
+ 
+//    const districtKeys=Object.keys(this.props.covidData.dataObject[matchID].districts)
+
+  
+  
+//   return(
+//      <>
+     
+//     {districtKeys.map((item,i)=>{ 
+                         
+//        const reuseDistrictMatch=this.props.covidData.dataObject[matchID].districts[item].total
+       
+//        return <div style={{marginLeft:"110px"}}>
+//                     <ul className="sta891responsive-table">
+//                       <li className="sta891Statedata_table_row link dim black b shadow-5" >                         
+//                          <div className="sta891Col  sta891Col-0">{item}</div>
+//                          <div className="sta891Col  sta891Col-1">{isNaN(reuseDistrictMatch.confirmed) ? "N/A" : <NumberFormat value={reuseDistrictMatch.confirmed} displayType={'text'} thousandSeparator={true}/>}</div>
+//                          <div className="sta891Col  sta891Col-2">{isNaN(reuseDistrictMatch.tested)    ? "N/A" : <NumberFormat value={reuseDistrictMatch.tested} displayType={'text'} thousandSeparator={true}/>}</div>
+//                          <div className="sta891Col  sta891Col-3">{isNaN(reuseDistrictMatch.recovered) ? "N/A" : <NumberFormat value={reuseDistrictMatch.recovered} displayType={'text'} thousandSeparator={true}/>}</div> 
+//                          <div className="sta891Col  sta891Col-4">{isNaN(reuseDistrictMatch.deceased)  ? "N/A" : <NumberFormat value={reuseDistrictMatch.deceased} displayType={'text'} thousandSeparator={true}/>}</div>                                                                               
+                        
+//                       </li> 
+//                     </ul>
+//                </div>
+//       })} 
+//     </>  
+//   )
+// }

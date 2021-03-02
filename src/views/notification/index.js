@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {GrNotification} from "react-icons/gr";
+import {IoNotificationsOffSharp} from "react-icons/io5";
 import {IoIosNotifications} from "react-icons/io";
 import axios from 'axios';
 
@@ -15,8 +15,6 @@ constructor(props){
 super(props);
 this.state={
 toggle:false,
-noti:{},
-loading:true
 }
 }
 
@@ -28,15 +26,29 @@ loading:true
 
 render(){
 
-    console.log("Notidata",this.props.NotiData.data.data)
+    console.log("Notidata",this.props.NotiData.error)
+const reduxData=this.props.NotiData
 
+if(!reduxData.error){
 return(
 
 <>
-<div className="sta891NotificationBell" onClick={()=>this.showNoti()}><IoIosNotifications style={{color:"white",fontSize:"39px"}}/></div>
-<div className={this.state.toggle ?  "sta891NotiMain" : "sta891NotiMainOn" }>{this.mapNotiData()}</div>
+<div className="sta891NotificationBell" onClick={()=>this.showNoti()}> 
+
+
+{this.state.toggle ? <IoNotificationsOffSharp style={{color:"white",fontSize:"39px"}}/> : <IoIosNotifications style={{color:"white",fontSize:"43px"}}/>}
+
+</div>
+
+<div className={this.state.toggle ?  "sta891NotiMain" : "sta891NotiMainOn"} onClick={()=>this.showNoti()}>{this.mapNotiData()}</div>
+
 </>
-)
+
+)}
+
+else{
+      return <span style={{float:"right",color:"white"}}> :( Bad Response</span>
+}
 }
 
 
@@ -50,7 +62,7 @@ return(
 
 
   mapNotiData=()=>{
-
+      
     const  reduxData=this.props.NotiData.data.data
 
    return(
@@ -77,7 +89,10 @@ return(
 </>
 )
 }
+
 }
+
+
 
 const mapStateToProps=(state)=>{
 return {NotiData:state.NotiData}

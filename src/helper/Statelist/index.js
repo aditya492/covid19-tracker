@@ -35,7 +35,7 @@ export const Statelist={
 "TG": "Telangana",
 "TN": "Tamil Nadu",
 "TR":"Tripura",
-"TT": "TT",
+"TT": "India",
 "UP": "Utter Pradesh",
 "UT": "Uttranchal",
 "WB":"West Bengal" 

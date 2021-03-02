@@ -8,9 +8,9 @@ const Calculatedata=(datast)=>{
  let tested=0
  let vaccinated=0
 
-  const key=Object.keys(datast)
+   const DataKey=Object.keys(datast)  
 
-   key.map((val,i)=>{
+   DataKey.map((val,i)=>{
 
             if(datast[val].total.recovered && datast[val].total.tested && datast[val].total.deceased && datast[val].total.vaccinated!=null){
               confirmed+=datast[val].total.confirmed;                                

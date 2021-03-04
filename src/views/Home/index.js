@@ -18,9 +18,11 @@ import Sidebar from '../Sidebar'
 
 import Card from '../../common/Card'
 import StateSearchBar from '../../common/StateSearchBar';
+import {ThemeChanger} from '../../common/themeChanger'
 
 import Calculatedata from '../../utils/Calculatedata';
-import getCovidData from '../../utils/Storage';
+
+
 
 
 import 'tachyons';
@@ -35,7 +37,8 @@ constructor(props){
 super(props);
 this.state={
 noti:[],
-sorted:false,
+isAsc:false,
+arrowMove:true
 }
 }
 
@@ -50,23 +53,27 @@ this.props.fetchStart()
 
 render(){
 
+const{isAsc,arrowMove}  =this.state
+
+const{sortBy}=this.props.covidData
+
 const reduxData=this.props.covidData
 const dataObject=this.props.covidData.dataObject
 console.log(reduxData);
 console.log("props",this.props);
-console.log("sortconf",this.props.sortconf)
+
 if(!reduxData.error){
 return(
 <>
 
 <h1 className="sta891MainH1"> <GoAlert/> Corona Outbreak!!! <GoAlert/></h1><span className="sta891MainSpan sta891MainH1 ">Let's Check Data!!</span>
-
+     
       <Sidebar/>
 
-     <Notification/>
+     <Notification/> <ThemeChanger/>
 
 <div style={{marginTop:"12px"}}>
-  <h2 className="sta891HomeIndia" onClick={()=>this.change()}>India</h2>
+  <h2 className="sta891HomeIndia">India</h2>
 </div>
 
 
@@ -88,12 +95,17 @@ return(
 
 <div className="sta891color_State_body">
   <li className="sta891Table_Header_ ">
-    <div className="sta891Col sta891Col-0" style={{cursor:"pointer"}} onClick={()=>{this.props.sortconf(reduxData.data,'states',dataObject,this.state.sorted);this.changeSorted()}}>States/UT {this.state.sorted ?<BsFillCaretUpFill/>: <BsFillCaretDownFill/> }</div>
-    <div className="sta891Col sta891Col-1" style={{cursor:"pointer"}} onClick={()=>{this.props.sortconf(reduxData.data,'confirm',dataObject,this.state.sorted);this.changeSorted()}}>Confirmed {this.state.sorted ?<BsFillCaretUpFill/>: <BsFillCaretDownFill/> }</div>
-    <div className="sta891Col sta891Col-2" style={{cursor:"pointer"}} onClick={()=>{this.props.sortconf(reduxData.data,'tested',dataObject,this.state.sorted);this.changeSorted()}}>Tested  {this.state.sorted ?<BsFillCaretUpFill/>: <BsFillCaretDownFill/> }</div>
-    <div className="sta891Col sta891Col-3" style={{cursor:"pointer"}} onClick={()=>{this.props.sortconf(reduxData.data,'recover',dataObject,this.state.sorted);this.changeSorted()}}>Recovered {this.state.sorted ?<BsFillCaretUpFill/>: <BsFillCaretDownFill/> }</div>
-    <div className="sta891Col sta891Col-4" style={{cursor:"pointer"}} onClick={()=>{this.props.sortconf(reduxData.data,'deceased',dataObject,this.state.sorted);this.changeSorted()}}>Deceased {this.state.sorted ?<BsFillCaretUpFill/>: <BsFillCaretDownFill/> }</div>
-    <div className="sta891Col sta891Col-5" style={{cursor:"pointer"}} onClick={()=>{this.props.sortconf(reduxData.data,'vaccinated',dataObject,this.state.sorted);this.changeSorted()}}>Vaccinated {this.state.sorted ?<BsFillCaretUpFill/>: <BsFillCaretDownFill/> }</div>
+    <div className="sta891Col sta891Col-0" style={{cursor:"pointer"}} onClick={()=>this.onHeaderClick('states')}>States/UT {'states'===sortBy && arrowMove?<BsFillCaretUpFill/>: <BsFillCaretDownFill/> }</div>
+   
+    <div className="sta891Col sta891Col-1" style={{cursor:"pointer"}} onClick={()=>this.onHeaderClick('confirm')}>Confirmed {'confirm'===sortBy && arrowMove ?<BsFillCaretUpFill/>: <BsFillCaretDownFill/> }</div>
+    
+    <div className="sta891Col sta891Col-2" style={{cursor:"pointer"}} onClick={()=>this.onHeaderClick('tested')}>Tested  {'tested'===sortBy && arrowMove?<BsFillCaretUpFill/>: <BsFillCaretDownFill/> }</div>
+   
+    <div className="sta891Col sta891Col-3" style={{cursor:"pointer"}} onClick={()=>this.onHeaderClick('recover')}>Recovered {'recover'===sortBy && arrowMove ?<BsFillCaretUpFill/>: <BsFillCaretDownFill/> }</div>
+    
+    <div className="sta891Col sta891Col-4" style={{cursor:"pointer"}} onClick={()=>this.onHeaderClick('deceased')}>Deceased {'deceased'===sortBy && arrowMove?<BsFillCaretUpFill/>: <BsFillCaretDownFill/> }</div>
+    
+    <div className="sta891Col sta891Col-5" style={{cursor:"pointer"}} onClick={()=>this.onHeaderClick('vaccinated')}>Vaccinated {'vaccinated'===sortBy && arrowMove ?<BsFillCaretUpFill/>: <BsFillCaretDownFill/> }</div>
   </li>
 </div>
 
@@ -114,19 +126,74 @@ else{
 }
 
 
-changeSorted=()=>{
-  this.setState(previous=>({
-      sorted:!previous.sorted
- }))
+
+onHeaderClick=(sortKey)=>{
+ 
+  const{isAsc}=this.state
+ 
+  this.setState(prev=>({
+    isAsc:!prev.isAsc
+  }))
+
+  this.setState(prev=>({
+    arrowMove:!prev.arrowMove
+  }))
+
+  const reduxData=this.props.covidData.data
+  const dataObject=this.props.covidData.dataObject
+  
+  if(sortKey)
+  {
+    
+    return this.props.sortconf(reduxData,sortKey,dataObject,isAsc)
+   
+  } 
+ // else if(sortKey){
+
+ //     this.setState(prev=>({
+ //      confirmed:!prev.confirmed
+ //    }))
+ //      return this.props.sortconf(reduxData,sortKey,dataObject,isAsc)
+ // }
+
+ // else if(sortKey){
+
+ //     this.setState(prev=>({
+ //      tested:!prev.tested
+ //    }))
+ //      return this.props.sortconf(reduxData,sortKey,dataObject,isAsc)
+ // }
+
+ // else if(sortKey){
+
+ //     this.setState(prev=>({
+ //      recovered:!prev.recovered
+ //    }))
+ //      return this.props.sortconf(reduxData,sortKey,dataObject,isAsc)
+ // }
+
+ 
+ // else if(sortKey){
+
+ //     this.setState(prev=>({
+ //      vaccinated:!prev.vaccinated
+ //    }))
+ //      return this.props.sortconf(reduxData,sortKey,dataObject,isAsc)
+ // }
+ 
+ // else if(sortKey){
+
+ //     this.setState(prev=>({
+ //      deceased:!prev.deceased
+ //    }))
+ //      return this.props.sortconf(reduxData,sortKey,dataObject,isAsc)
+ // }
+
+
 
 }
 
 
-change=()=>{
-this.setState(prev=>({
- theme:!prev.theme 
-}))
-}
 
 
  
@@ -232,7 +299,7 @@ return {covidData:state.covidData,};
 
 const mapDispatchToProps=(dispatch)=>{
   return{
-    sortconf:(final,sortBy,dataObject,toggle)=>dispatch(sortAsc(final,sortBy,dataObject,toggle)),
+    sortconf:(final,sortBy,dataObject,isAsc)=>dispatch(sortAsc(final,sortBy,dataObject,isAsc)),
     fetchStart:()=>dispatch(fetchStart())
   }
 }

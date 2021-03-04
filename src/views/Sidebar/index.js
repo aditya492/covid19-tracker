@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {FaBars,FaGithub,FaHackerrank,FaLinkedinIn,FaInstagram} from "react-icons/fa";
 import {AiOutlineClose,AiOutlineHome} from 'react-icons/ai';
 import State_List from '../../helper/Statelist';
+import {ThemeChanger} from '../../common/themeChanger'
 import './sidebar.css';
 import 'tachyons';
 
@@ -56,7 +57,7 @@ class  Sidebar extends Component{
       <FaGithub style={{background:"#1e1e30"}}/>
       </a>  
     </div>
-
+    
 
     <div className="sta891Navbar">
       <a href="https://www.hackerrank.com/adityabarve96" target="_blank" className="menu-bars" style={{color:"white"}}>
@@ -70,6 +71,8 @@ class  Sidebar extends Component{
       <FaLinkedinIn style={{background:"#1e1e30"}}/>
       </a>  
     </div>
+
+     
 
    
     

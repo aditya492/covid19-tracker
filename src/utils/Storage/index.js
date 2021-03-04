@@ -1,27 +1,12 @@
-import React from "react";
-import axios from 'axios';
 
-//
-const getCovidData=()=>{
+const htmlEl = document.getElementsByTagName('html')[ 0 ];
+const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : localStorage.setItem('theme', 'light');
 
- const localData=sessionStorage.getItem("covid")
-
-
- if(localData){
-
- 	return new Promise(resolve=>resolve(JSON.parse(localData)))
- }
-
- else{ 
- 	 axios.get("https://api.covid19india.org/v4/min/data.min.json")
- 	 .then(res=>{
- 	 	sessionStorage.setItem("covid",JSON.stringify(res))
- 	 	return new Promise(resolve=> resolve(res)) 
- 	 	
- 	 })
-
- 	
- }
+if (currentTheme) {
+  htmlEl.dataset.theme = currentTheme;
 }
 
-export default getCovidData;
+export const toggleTheme = (theme) => {
+  htmlEl.dataset.theme = theme;
+  localStorage.setItem('theme', theme);
+}

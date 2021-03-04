@@ -126,7 +126,23 @@ class District extends Component{
    const matchID=this.props.match.params.id
  
    const districtKeys=Object.keys(this.props.covidData.dataObject[matchID].districts)
+     const reduxData=this.props.covidData.data
+
+  console.log("dis. pge",reduxData)
   
+  const map=reduxData.map(item=>{
+     
+    return item.data.districts
+  })
+
+ console.log(map,"msp")
+
+
+
+
+
+
+
   return(
      <>
      

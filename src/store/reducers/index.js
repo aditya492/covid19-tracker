@@ -5,7 +5,7 @@ const myState={
           loading:true,
           districts:[],
           data:[],
-          toggle:false,
+          isAsc:false,
         
         
 }
@@ -47,50 +47,15 @@ const mainreducer=(state=myState,action)=>{
 
 
    case 'SORT_HOME_DATA':
-   const sorting=sortData(action.data,action.sortBy,action.toggle) 
+   const sorting=sortData(action.data,action.sortBy,action.isAsc) 
    return{
        data:sorting,
-       dataObject:action.dataObject,
-       toggle:action.toggle
+       dataObject:action.dataObject,    
+       sortBy:action.sortBy,
+      
    }
    
 
-   // case 'IS_ASC':
-   // const finalSort=sortlogic(action.data)
-   // console.log("action",action.sortBy)
-   // return{
-   //    data:finalSort,
-   //    toggle:!state.toggle,
-   //    dataObject:action.dataObject,
-
-   // }
-    
-   // case 'IS_CON':
-   // const finalConf=sortConf(action.data)
-   // console.log("action",finalConf)
-   // return{
-   //    data:finalConf,
-   //    toggle:!state.toggle,
-   //    dataObject:action.dataObject,
-   // }
-
-   // case 'IS_TES':
-   // const finalTes=sortTes(action.data)
-  
-   // return{
-   //    data:finalTes,
-   //    toggle:!state.toggle,
-   //    dataObject:action.dataObject,
-   // }
-    
-
-
-   // case 'IS_DES':
-   // const data=sortDesc(action.payload)
-   // return{
-   //   data:data,
-
-   // }
    
 
   	default:

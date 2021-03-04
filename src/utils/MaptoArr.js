@@ -18,7 +18,8 @@ export const tabledatatoarr = data => {
       tested:data[obj].total.tested,
       deceased:data[obj].total.deceased,
       recovered:data[obj].total.recovered,
-      vaccinated:data[obj].total.vaccinated
+      vaccinated:data[obj].total.vaccinated,
+      districts:data[obj].districts
     }
     fullData.push(statedata);
   }

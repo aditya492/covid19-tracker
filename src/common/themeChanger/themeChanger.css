@@ -10,11 +10,8 @@
 
 }
 
+
 html[data-theme='dark'] {
    
-    filter: invert(1) hue-rotate(180deg)
-}
-
-html {
-    transition: color 300ms, background-color 300ms;
+    filter:  invert(1)  hue-rotate(180deg)
 }

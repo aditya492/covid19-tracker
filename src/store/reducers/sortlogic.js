@@ -81,6 +81,38 @@ export const sortData=(reduxData,sortBy,isAsc)=>{
 
 }
 }
+
+
+export const sortDistrict=(districtData)=>{
+       
+
+   const districts=districtData.sort((a,b)=>(b.name.localeCompare(a.name)))
+   return districts
+
+
+
+ //     if(isAsc==true){
+ //     	   switch(sortBy){
+ //     	      case 'district':
+ //     	         const districts=districtData.sort((a,b)=>(b.name.localeCompare(a.name)))
+	//              return districts
+	//              break;
+ //     }
+ //  }
+    
+ // if(isAsc==false){
+ //     	   switch(sortBy){
+ //     	       case 'district':
+ //     	           const districts=districtData.sort((a,b)=>(a.name.localeCompare(b.name)))
+	//                return districts
+	//                 break;
+ //     }
+ //  }
+    
+	
+	
+	
+}
  
 
 

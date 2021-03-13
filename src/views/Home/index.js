@@ -46,21 +46,27 @@ arrowMove:true
 componentDidMount(){
 this.props.fetchStart()
 
+
 }
 
- 
+
 
 
 render(){
 
-const{isAsc,arrowMove}  =this.state
 
-const{sortBy}=this.props.covidData
+
+const{sortBy,isAsc}=this.props.covidData
 
 const reduxData=this.props.covidData
 const dataObject=this.props.covidData.dataObject
-console.log(reduxData);
+console.log("isAsc",this.props.covidData.isAsc);
 console.log("props",this.props);
+
+const setColor=localStorage.getItem('isAsc')
+const colorconvert=JSON.parse(setColor)
+const setOrder=localStorage.getItem('sortBy')
+const convert=JSON.parse(setOrder)
 
 if(!reduxData.error){
 return(
@@ -95,17 +101,17 @@ return(
 
 <div className="sta891color_State_body">
   <li className="sta891Table_Header_ ">
-    <div className="sta891Col sta891Col-0" style={{cursor:"pointer"}} onClick={()=>this.onHeaderClick('states')}>States/UT {'states'===sortBy && arrowMove?<BsFillCaretUpFill/>: <BsFillCaretDownFill/> }</div>
+    <div className="sta891Col sta891Col-0 "  style={   convert==='states' ? {cursor:"pointer",color:"green"} : {cursor:"pointer",color:"red"}} onClick={()=>this.onHeaderClick('states')}>States/UT {'states'===convert && colorconvert?<BsFillCaretUpFill color="green"/>: <BsFillCaretDownFill color="red"/> }</div>
    
-    <div className="sta891Col sta891Col-1" style={{cursor:"pointer"}} onClick={()=>this.onHeaderClick('confirm')}>Confirmed {'confirm'===sortBy && arrowMove ?<BsFillCaretUpFill/>: <BsFillCaretDownFill/> }</div>
+    <div className="sta891Col sta891Col-1 " style={  convert==='confirm' ? {cursor:"pointer",color:"green"} : {cursor:"pointer",color:"red"}} onClick={()=>this.onHeaderClick('confirm')}>Confirmed {'confirm'===convert && colorconvert ?<BsFillCaretUpFill color="green"/>: <BsFillCaretDownFill color="red"/> }</div>
     
-    <div className="sta891Col sta891Col-2" style={{cursor:"pointer"}} onClick={()=>this.onHeaderClick('tested')}>Tested  {'tested'===sortBy && arrowMove?<BsFillCaretUpFill/>: <BsFillCaretDownFill/> }</div>
+    <div className="sta891Col sta891Col-2" style={ convert==='tested' ? {cursor:"pointer",color:"green"} : {cursor:"pointer",color:"red"}} onClick={()=>this.onHeaderClick('tested')}>Tested  {'tested'===convert && colorconvert?<BsFillCaretUpFill color="green"/>: <BsFillCaretDownFill color="red"/> }</div>
    
-    <div className="sta891Col sta891Col-3" style={{cursor:"pointer"}} onClick={()=>this.onHeaderClick('recover')}>Recovered {'recover'===sortBy && arrowMove ?<BsFillCaretUpFill/>: <BsFillCaretDownFill/> }</div>
+    <div className="sta891Col sta891Col-3" style={  convert==='recover' ? {cursor:"pointer",color:"green"} : {cursor:"pointer",color:"red"}} onClick={()=>this.onHeaderClick('recover')}>Recovered {'recover'===convert && colorconvert ?<BsFillCaretUpFill color="green"/>: <BsFillCaretDownFill color="red"/> }</div>
     
-    <div className="sta891Col sta891Col-4" style={{cursor:"pointer"}} onClick={()=>this.onHeaderClick('deceased')}>Deceased {'deceased'===sortBy && arrowMove?<BsFillCaretUpFill/>: <BsFillCaretDownFill/> }</div>
+    <div className="sta891Col sta891Col-4" style={  convert==='deceased' ? {cursor:"pointer",color:"green"} : {cursor:"pointer",color:"red"}} onClick={()=>this.onHeaderClick('deceased')}>Deceased {'deceased'===convert && colorconvert?<BsFillCaretUpFill color="green"/>: <BsFillCaretDownFill color="red"/> }</div>
     
-    <div className="sta891Col sta891Col-5" style={{cursor:"pointer"}} onClick={()=>this.onHeaderClick('vaccinated')}>Vaccinated {'vaccinated'===sortBy && arrowMove ?<BsFillCaretUpFill/>: <BsFillCaretDownFill/> }</div>
+    <div className="sta891Col sta891Col-5" style={ convert==='vaccinated' ? {cursor:"pointer",color:"green"} : {cursor:"pointer",color:"red"}} onClick={()=>this.onHeaderClick('vaccinated')}>Vaccinated {'vaccinated'===convert && colorconvert ?<BsFillCaretUpFill color="green"/>: <BsFillCaretDownFill color="red"/> }</div>
   </li>
 </div>
 
@@ -129,67 +135,25 @@ else{
 
 onHeaderClick=(sortKey)=>{
  
-  const{isAsc}=this.state
+ const{isAsc,sortBy,data,dataObject}=this.props.covidData
+
+ const isAscc=isAsc;
+
+  const reduxData=data
+  const dataObj=dataObject
+
  
-  this.setState(prev=>({
-    isAsc:!prev.isAsc
-  }))
-
-  this.setState(prev=>({
-    arrowMove:!prev.arrowMove
-  }))
-
-  const reduxData=this.props.covidData.data
-  const dataObject=this.props.covidData.dataObject
   
-  if(sortKey)
-  {
-    
-    return this.props.sortconf(reduxData,sortKey,dataObject,isAsc)
+  if(sortKey==sortBy)
+  {   
+    return this.props.sortconf(reduxData,sortKey,dataObj,!isAscc)
+
    
   } 
- // else if(sortKey){
-
- //     this.setState(prev=>({
- //      confirmed:!prev.confirmed
- //    }))
- //      return this.props.sortconf(reduxData,sortKey,dataObject,isAsc)
- // }
-
- // else if(sortKey){
-
- //     this.setState(prev=>({
- //      tested:!prev.tested
- //    }))
- //      return this.props.sortconf(reduxData,sortKey,dataObject,isAsc)
- // }
-
- // else if(sortKey){
-
- //     this.setState(prev=>({
- //      recovered:!prev.recovered
- //    }))
- //      return this.props.sortconf(reduxData,sortKey,dataObject,isAsc)
- // }
-
+  else{
+        return this.props.sortconf(reduxData,sortKey,dataObj,isAscc)
+  } 
  
- // else if(sortKey){
-
- //     this.setState(prev=>({
- //      vaccinated:!prev.vaccinated
- //    }))
- //      return this.props.sortconf(reduxData,sortKey,dataObject,isAsc)
- // }
- 
- // else if(sortKey){
-
- //     this.setState(prev=>({
- //      deceased:!prev.deceased
- //    }))
- //      return this.props.sortconf(reduxData,sortKey,dataObject,isAsc)
- // }
-
-
 
 }
 
@@ -203,7 +167,6 @@ getStateTableUI=()=>{
 const reduxData=this.props.covidData.data
 
 
-const StateKey=Object.keys(reduxData)
 
 
 return(

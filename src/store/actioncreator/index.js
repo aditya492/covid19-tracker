@@ -15,3 +15,5 @@ export const IS_ASC='IS_ASC';
 export const IS_DES='IS_DES';
 export const SORT_HOME_DATA='SORT_HOME_DATA';
 export const IS_TES='IS_TES';
+
+export const DISTRICT_DATA='DISTRICT_DATA';

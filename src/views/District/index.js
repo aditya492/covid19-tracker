@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import  {connect } from 'react-redux';      
-import  {fetchStart,sortAsc} from '../../store/actions';
+import  {fetchStart,districtData} from '../../store/actions';
 import {Link} from 'react-router-dom';
 import NumberFormat from 'react-number-format';
 import axios from  'axios';
@@ -9,6 +9,7 @@ import {BeatLoader} from 'react-spinners';
 
 import State_List from '../../helper/Statelist';
 import getCovidData from '../../utils/Storage';
+import {distArray} from '../../utils/distArray'
 
 
 import Card from '../../common/Card';
@@ -23,6 +24,7 @@ import './district.css';
 
 class District extends Component{
     constructor(props){
+
       super(props);
       this.state={
             arr:null,
@@ -30,26 +32,29 @@ class District extends Component{
             error:false,
             statedata:[],
             searchterm:'',
+            isAsc:false
 
       }
     }
 
-  componentDidMount(){
+
+   componentWillMount(){
+        this.props.fetchStart(this.props.match.params.id )
+
+   }
+  // componentDidMount(){
     
-   const checkData=this.props.fetchStart() ? null : this.props.fetchStart()   
-    
-  }
+  //  this.props.fetchStart(this.props.match.params.id )
+  // }
    
-   
-
-	render(){  
-
-
  
+	render(){  
+   
+  
   const loadingg=this.props.covidData.loading
   const reduxData=this.props.covidData
   const cardData=this.props.covidData.dataObject
-
+console.log("dataobject",this.props.covidData.dataObject)
        const{
              error,
              arr,
@@ -57,13 +62,21 @@ class District extends Component{
         } =this.state;
      
           const reuseMatchid= this.props.match.params.id 
-      
-
-          const confirmed=loadingg ?null:cardData[reuseMatchid].total.confirmed;
-          const recovered=loadingg ? null:cardData[reuseMatchid].total.recovered;
-          const deceased=loadingg ? null:cardData[reuseMatchid].total.deceased;
-          const tested=loadingg ? null:cardData[reuseMatchid].total.tested;
-          const vaccinated=loadingg ? null:cardData[reuseMatchid].total.vaccinated; 
+    
+          
+     
+          // const confirmed=loadingg ?null:cardData[reuseMatchid].total.confirmed;
+          // const recovered=loadingg ? null:cardData[reuseMatchid].total.recovered;
+          // const deceased=loadingg ? null:cardData[reuseMatchid].total.deceased;
+          // const tested=loadingg ? null:cardData[reuseMatchid].total.tested;
+          // const vaccinated=loadingg ? null:cardData[reuseMatchid].total.vaccinated;
+          //  <Card
+               //  confirmed={confirmed}
+               //  recovered={recovered}
+               //  tested={tested}
+               //  deceased={deceased}
+               //  vaccinated={vaccinated}         
+               // />    
           
     
       if(!reduxData.error){
@@ -72,13 +85,7 @@ class District extends Component{
 			        <Sidebar/>
              <h1 className="sta891Cardh1C1">{State_List[this.props.match.params.id]}</h1>
          
-                <Card
-                confirmed={confirmed}
-                recovered={recovered}
-                tested={tested}
-                deceased={deceased}
-                vaccinated={vaccinated}         
-               />     
+                 
           
              
 
@@ -95,7 +102,7 @@ class District extends Component{
      
               <div className="sta891color_State_body">
                 <li className="sta891Table_Header_">
-                   <div className="sta891Col sta891Col-0">Districts</div>
+                   <div className="sta891Col sta891Col-0" onClick={()=>this.headerClick()}>Districts</div>
                    <div className="sta891Col sta891Col-1">Confirmed</div>
                    <div className="sta891Col sta891Col-2">Tested</div>
                    <div className="sta891Col sta891Col-3">Recovered</div>
@@ -115,6 +122,61 @@ class District extends Component{
 
 
 
+headerClick=()=>{
+    //   const cardData=this.props.covidData.dataObject
+    // const reuseMatchid= this.props.match.params.id 
+
+
+// const Datareal=cardData[reuseMatchid]
+//  const stateData = [];
+//       for (let data in Datareal[ 'districts' ]) {
+//         const Districtobjects = {
+//           id: data,
+//           name: data,                                       
+//           Data: Datareal[ 'districts' ][ data ],
+//           confirmed:Datareal[ 'districts' ][ data ].total.confirmed,
+//           tested:Datareal[ 'districts' ][ data ].total.tested,
+//           recovered:Datareal[ 'districts' ][ data ].total.recovered,
+//           deceased:Datareal[ 'districts' ][ data ].total.deceased,
+//           vaccinated:Datareal[ 'districts' ][ data ].total.vaccinated,
+//         }
+//         stateData.push(Districtobjects);
+//       }
+
+const cardData=this.props.covidData.district
+  const object=this.props.covidData.dataObject
+  const homeData=this.props.covidData.data
+ 
+this.setState(prev=>({
+  isAsc:!prev.isAsc
+}))
+
+ console.log("prev",this.state.isAsc)
+this.props.districtData(cardData,object,homeData)
+
+   // if(sortKey==sortBy){
+
+
+   //  this.props.districtData(cardData,object,homeData,!order,sortBy)
+   // }
+   //  else{
+   //        this.props.districtData(cardData,object,homeData,order,sortBy)
+
+   //  }   ye mera home pae haiii ab ki b state pr click kriga to usko jana chaye na district pge pr vo id ke sth pr vo error degs
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
   inputHandler=(e)=>{
           this.setState({searchterm:e.target.value})
       }
@@ -122,44 +184,54 @@ class District extends Component{
 
 //FUNCTION TO SHOW DISTRICT DATA
  getDistrictUI=()=>{
+
    
-   const matchID=this.props.match.params.id
- 
-   const districtKeys=Object.keys(this.props.covidData.dataObject[matchID].districts)
-     const reduxData=this.props.covidData.data
-
-  console.log("dis. pge",reduxData)
-  
-  const map=reduxData.map(item=>{
+  //  const matchID=this.props.match.params.id
      
-    return item.data.districts
-  })
+  //   const districtKeys=Object.keys(this.props.covidData.dataObject[matchID].districts)
+  //    const reduxData=this.props.covidData.data
 
- console.log(map,"msp")
+  // console.log("dis. pge",reduxData)
+  
+  //  const loadingg=this.props.covidData.loading
+
+//     const cardData=this.props.covidData.dataObject
+//     const reuseMatchid= this.props.match.params.id 
 
 
+// const Datareal=cardData[reuseMatchid]
+//  const stateData = [];
+//       for (let data in Datareal[ 'districts' ]) {
+//         const Districtobjects = {
+//           id: data,
+//           name: data,                                       
+//           Data: Datareal[ 'districts' ][ data ],
+//           confirmed:Datareal[ 'districts' ][ data ].total.confirmed,
+//           tested:Datareal[ 'districts' ][ data ].total.tested,
+//           recovered:Datareal[ 'districts' ][ data ].total.recovered,
+//           deceased:Datareal[ 'districts' ][ data ].total.deceased,
+//           vaccinated:Datareal[ 'districts' ][ data ].total.vaccinated,
+//         }
+//         stateData.push(Districtobjects);
+//       }
+console.log("isacf",this.props.covidData.isAsc)
+     {console.log("final",this.props.covidData)}
 
-
-
-
-
+  const final=this.props.covidData.districts
   return(
      <>
-     
-    {districtKeys.map((item,i)=>{ 
+    {final.map(item=>{ 
                          
-       const reuseDistrictMatch=this.props.covidData.dataObject[matchID].districts[item].total
-     
       
 
        return <div style={{marginLeft:"110px"}}>
                     <ul className="sta891responsive-table">
                       <li className="sta891Statedata_table_row link dim black b shadow-5" >                         
-                         <div className="sta891Col  sta891Col-0">{item}</div>
-                         <div className="sta891Col  sta891Col-1">{isNaN(reuseDistrictMatch.confirmed) ? "N/A" : <NumberFormat value={reuseDistrictMatch.confirmed} displayType={'text'} thousandSeparator={true}/>}</div>
-                         <div className="sta891Col  sta891Col-2">{isNaN(reuseDistrictMatch.tested)    ? "N/A" : <NumberFormat value={reuseDistrictMatch.tested} displayType={'text'} thousandSeparator={true}/>}</div>
-                         <div className="sta891Col  sta891Col-3">{isNaN(reuseDistrictMatch.recovered) ? "N/A" : <NumberFormat value={reuseDistrictMatch.recovered} displayType={'text'} thousandSeparator={true}/>}</div> 
-                         <div className="sta891Col  sta891Col-4">{isNaN(reuseDistrictMatch.deceased)  ? "N/A" : <NumberFormat value={reuseDistrictMatch.deceased} displayType={'text'} thousandSeparator={true}/>}</div>                                                                               
+                         <div className="sta891Col  sta891Col-0">{item.id}</div>
+                         <div className="sta891Col  sta891Col-1">{isNaN(item.confirmed) ? "N/A" : <NumberFormat value={item.confirmed} displayType={'text'} thousandSeparator={true}/>}</div>
+                         <div className="sta891Col  sta891Col-2">{isNaN(item.tested)    ? "N/A" : <NumberFormat value={item.tested} displayType={'text'} thousandSeparator={true}/>}</div>
+                         <div className="sta891Col  sta891Col-3">{isNaN(item.recovered) ? "N/A" : <NumberFormat value={item.recovered} displayType={'text'} thousandSeparator={true}/>}</div> 
+                         <div className="sta891Col  sta891Col-4">{isNaN(item.deceased)  ? "N/A" : <NumberFormat value={item.deceased} displayType={'text'} thousandSeparator={true}/>}</div>                                                                               
                         
                       </li> 
                     </ul>
@@ -214,8 +286,8 @@ const mapStateToProps=state=>{
 const mapDispatchToProps=(dispatch)=>{
   return{
    
-    fetchStart:()=>dispatch(fetchStart()),
-    sortconf:(final,id)=>dispatch(sortAsc(final,id))
+    fetchStart:(d)=>dispatch(fetchStart(d)),
+    districtData:(district,object,homeData)=>dispatch(districtData(district,object,homeData)),
   }
 }
 
@@ -226,37 +298,11 @@ export default connect(mapStateToProps,mapDispatchToProps)(District);
 
 
 
-
-
-
-// getDistrictUI=()=>{
-   
-//    const matchID=this.props.match.params.id
- 
-//    const districtKeys=Object.keys(this.props.covidData.dataObject[matchID].districts)
-
-  
-  
-//   return(
-//      <>
-     
-//     {districtKeys.map((item,i)=>{ 
-                         
-//        const reuseDistrictMatch=this.props.covidData.dataObject[matchID].districts[item].total
-       
-//        return <div style={{marginLeft:"110px"}}>
-//                     <ul className="sta891responsive-table">
-//                       <li className="sta891Statedata_table_row link dim black b shadow-5" >                         
-//                          <div className="sta891Col  sta891Col-0">{item}</div>
-//                          <div className="sta891Col  sta891Col-1">{isNaN(reuseDistrictMatch.confirmed) ? "N/A" : <NumberFormat value={reuseDistrictMatch.confirmed} displayType={'text'} thousandSeparator={true}/>}</div>
-//                          <div className="sta891Col  sta891Col-2">{isNaN(reuseDistrictMatch.tested)    ? "N/A" : <NumberFormat value={reuseDistrictMatch.tested} displayType={'text'} thousandSeparator={true}/>}</div>
-//                          <div className="sta891Col  sta891Col-3">{isNaN(reuseDistrictMatch.recovered) ? "N/A" : <NumberFormat value={reuseDistrictMatch.recovered} displayType={'text'} thousandSeparator={true}/>}</div> 
-//                          <div className="sta891Col  sta891Col-4">{isNaN(reuseDistrictMatch.deceased)  ? "N/A" : <NumberFormat value={reuseDistrictMatch.deceased} displayType={'text'} thousandSeparator={true}/>}</div>                                                                               
-                        
-//                       </li> 
-//                     </ul>
-//                </div>
-//       })} 
-//     </>  
-//   )
-// }
+ //  <Card
+               //  confirmed={confirmed}
+               //  recovered={recovered}
+               //  tested={tested}
+               //  deceased={deceased}
+               //  vaccinated={vaccinated}         
+               // />     
+          

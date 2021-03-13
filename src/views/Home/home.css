@@ -135,6 +135,10 @@ color:white;
 
   }
 
+ .headingcolor{
+  color:green;
+ }
+
   .sta891CommenHover:hover{
     background:gray;
   }
@@ -176,6 +180,9 @@ color:white;
   .sta891Col{
     color: white;
   }
+
+
+
 
 
 

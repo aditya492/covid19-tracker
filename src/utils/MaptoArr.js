@@ -29,6 +29,7 @@ export const tabledatatoarr = (data) => {
 
 
 export const districtItem=(cardData,reuseMatchid)=>{
+    
   console.log("cardata",cardData[reuseMatchid])
  const Datareal=cardData[reuseMatchid]
  const stateData = [];

@@ -83,34 +83,76 @@ export const sortData=(reduxData,sortBy,isAsc)=>{
 }
 
 
-export const sortDistrict=(districtData)=>{
+export const sortDistrict=(districtData,isAsc,sortBy)=>{
        
-
-   const districts=districtData.sort((a,b)=>(b.name.localeCompare(a.name)))
-   return districts
+ 
 
 
+  if(isAsc==true){
+     	   switch(sortBy){
 
- //     if(isAsc==true){
- //     	   switch(sortBy){
- //     	      case 'district':
- //     	         const districts=districtData.sort((a,b)=>(b.name.localeCompare(a.name)))
-	//              return districts
-	//              break;
- //     }
- //  }
+     	case 'district':
+     	    const districts=districtData.sort((a,b)=>(a.name.localeCompare(b.name)))
+	        return districts
+	        break;
+
+
+	   case 'deceased':
+	      const DeceasedData=districtData.sort((a,b)=>(a.deceased)-(b.deceased))
+	      return DeceasedData
+		  break;
+
+
+	   case 'tested':
+	      const testedData=districtData.sort((a,b)=>(a.tested)-(b.tested))
+	      return testedData
+		  break;
+
+	   case 'confirm':
+	      const confirmData=districtData.sort((a,b)=>(a.confirmed)-(b.confirmed))
+		  return confirmData
+		  break;
+
+	   case 'recover':
+	      const recoverData=districtData.sort((a,b)=>(a.recovered)-(b.recovered))
+		  return recoverData
+		  break;
+     }
+  }
     
- // if(isAsc==false){
- //     	   switch(sortBy){
- //     	       case 'district':
- //     	           const districts=districtData.sort((a,b)=>(a.name.localeCompare(b.name)))
-	//                return districts
-	//                 break;
- //     }
- //  }
+ if(isAsc==false){
+     	     switch(sortBy){
+
+     	case 'district':
+     	    const districts=districtData.sort((a,b)=>(b.name.localeCompare(a.name)))
+	        return districts
+	        break;
+
+
+	   case 'deceased':
+	      const DeceasedData=districtData.sort((a,b)=>(b.deceased)-(a.deceased))
+	      return DeceasedData
+		  break;
+
+
+	   case 'tested':
+	      const testedData=districtData.sort((a,b)=>(b.tested)-(a.tested))
+	      return testedData
+		  break;
+
+	   case 'confirm':
+	      const confirmData=districtData.sort((a,b)=>(b.confirmed)-(a.confirmed))
+		  return confirmData
+		  break;
+
+	   case 'recover':
+	      const recoverData=districtData.sort((a,b)=>(b.recovered)-(a.recovered))
+		  return recoverData
+		  break;
+     }
     
 	
-	
+	}
 	
 }
  

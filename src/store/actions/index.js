@@ -79,7 +79,7 @@ export const sortAsc=(sortData,sortBy,dataObject,isAsc)=>{
 
  }
 
- export const districtData=(district,object,homeData)=>{
+ export const districtData=(district,object,homeData,isAsc,sortBy)=>{
    console.log("action ka match",district)
 
    return{
@@ -88,7 +88,8 @@ export const sortAsc=(sortData,sortBy,dataObject,isAsc)=>{
      dataObject:object,    
      district:district,
      data:homeData,
-     // isAsc:isAsc,
+     isAsc:isAsc,
+     sortBy:sortBy
      // sortBy:sortBy
      // match:match
    }

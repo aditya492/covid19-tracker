@@ -68,15 +68,15 @@ const mainreducer=(state=myState,action)=>{
    case 'DISTRICT_DATA':
   
       // const districtKeys=Object.keys(action.dataob[action.match].districts)
-    const sorted=sortDistrict(action.district)
+    const sorted=sortDistrict(action.district,action.isAsc,action.sortBy)
     console.log("sortedd",action.district)
    return{
      match:action.match,
      district:sorted,
      dataObject:action.dataObject,
      data:action.data,
-     // isAsc:action.isASc,
-     // sortBy:action.sortBy
+     isAsc:action.isASc,
+     sortBy:action.sortBy
    }
    
 

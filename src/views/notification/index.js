@@ -26,7 +26,6 @@ toggle:false,
 
 render(){
 
-    console.log("Notidata",this.props.NotiData.error)
 const reduxData=this.props.NotiData
 
 if(!reduxData.error){
@@ -57,7 +56,6 @@ else{
     this.setState(prev=>({
     toggle:!prev.toggle,
 }))
-    console.log(this.state.toggle)
 }
 
 

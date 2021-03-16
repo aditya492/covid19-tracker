@@ -60,8 +60,7 @@ const{sortBy,isAsc}=this.props.covidData
 
 const reduxData=this.props.covidData
 const dataObject=this.props.covidData.dataObject
-console.log("isAsc",this.props.covidData.isAsc);
-console.log("props",this.props);
+
 
 const setColor=localStorage.getItem('isAsc')
 const colorconvert=JSON.parse(setColor)

@@ -17,3 +17,4 @@ export const SORT_HOME_DATA='SORT_HOME_DATA';
 export const IS_TES='IS_TES';
 
 export const DISTRICT_DATA='DISTRICT_DATA';
+export const SET_DISTRICT_DATA='SET_DISTRICT_DATA';

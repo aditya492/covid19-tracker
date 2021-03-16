@@ -30,14 +30,14 @@ export const tabledatatoarr = (data) => {
 
 export const districtItem=(cardData,reuseMatchid)=>{
     
-  console.log("cardata",cardData[reuseMatchid])
+ 
  const Datareal=cardData[reuseMatchid]
  const stateData = [];
       for (let data in Datareal[ 'districts' ]) {
         const Districtobjects = {
           id: data,
           name: data,                                       
-          Data: Datareal[ 'districts' ][ data ],
+          // Data: Datareal[ 'districts' ][ data ],
           confirmed:Datareal[ 'districts' ][ data ].total.confirmed,
           tested:Datareal[ 'districts' ][ data ].total.tested,
           recovered:Datareal[ 'districts' ][ data ].total.recovered,

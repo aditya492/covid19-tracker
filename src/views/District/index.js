@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchStart, districtData } from '../../store/actions';
+import { fetchStart, districtData,setDistrictData } from '../../store/actions';
 import { Link } from 'react-router-dom';
 import NumberFormat from 'react-number-format';
 import axios from 'axios';
 import { BeatLoader } from 'react-spinners';
+import {BsSearch,BsFillCaretDownFill,BsFillCaretUpFill} from "react-icons/bs";
 
 
 import State_List from '../../helper/Statelist';
@@ -13,7 +14,7 @@ import { distArray } from '../../utils/distArray'
 
 
 import Card from '../../common/Card';
-
+import StateSearchBar  from '../../common/StateSearchBar'
 import Sidebar from '../Sidebar'
 
 import 'tachyons';
@@ -40,14 +41,10 @@ class District extends Component {
 
   componentDidMount() {
     this.props.fetchStart(this.props.match.params.id)
-
+    console.log("covidDataa",this.props.covidData)
+    // this.props.districtData( this.props.match.params.id,this.props.covidData.dataObject)
   }
-  // componentDidMount(){
-
-  //  this.props.fetchStart(this.props.match.params.id )
-  // }
-
-
+  
   render() {
 
 
@@ -61,7 +58,7 @@ class District extends Component {
     } = this.state;
 
     const reuseMatchid = this.props.match.params.id
-
+   const {sortBy,isAsc}=this.props.covidData
 
 
     const confirmed=loadingg ?null:cardData[reuseMatchid].total.confirmed;
@@ -101,11 +98,11 @@ class District extends Component {
 
           <div className="sta891color_State_body">
             <li className="sta891Table_Header_">
-              <div className="sta891Col sta891Col-0" onClick={() => this.headerClick('district')}>Districts</div>
-              <div className="sta891Col sta891Col-1" onClick={() => this.headerClick('confirm')}>Confirmed</div>
-              <div className="sta891Col sta891Col-2" onClick={() => this.headerClick('tested')}>Tested</div>
-              <div className="sta891Col sta891Col-3" onClick={() => this.headerClick('recover')}>Recovered</div>
-              <div className="sta891Col sta891Col-4" onClick={() => this.headerClick('deceased')}>Deceased</div>
+              <div className="sta891Col sta891Col-0"  style={sortBy==='district' ? {cursor:"pointer",color:"green"} : {cursor:"pointer",color:"red"}} onClick={() => this.headerClick('district')}>Districts {'district'===sortBy && isAsc?<BsFillCaretUpFill color="green"/>: <BsFillCaretDownFill color="red"/> }</div>
+              <div className="sta891Col sta891Col-1" style={sortBy==='confirm' ? {cursor:"pointer",color:"green"} : {cursor:"pointer",color:"red"}} onClick={() => this.headerClick('confirm')}>Confirmed {'confirm'===sortBy && isAsc?<BsFillCaretUpFill color="green"/>: <BsFillCaretDownFill color="red"/> }</div>
+              <div className="sta891Col sta891Col-2"  style={sortBy==='tested' ? {cursor:"pointer",color:"green"} : {cursor:"pointer",color:"red"}} onClick={() => this.headerClick('tested')}>Tested {'tested'===sortBy && isAsc?<BsFillCaretUpFill color="green"/>: <BsFillCaretDownFill color="red"/> }</div>
+              <div className="sta891Col sta891Col-3"  style={sortBy==='recover' ? {cursor:"pointer",color:"green"} : {cursor:"pointer",color:"red"}} onClick={() => this.headerClick('recover')}>Recovered {'recover'===sortBy && isAsc?<BsFillCaretUpFill color="green"/>: <BsFillCaretDownFill color="red"/> }</div>
+              <div className="sta891Col sta891Col-4"  style={sortBy==='deceased' ? {cursor:"pointer",color:"green"} : {cursor:"pointer",color:"red"}} onClick={() => this.headerClick('deceased')}>Deceased {'deceased'===sortBy && isAsc?<BsFillCaretUpFill color="green"/>: <BsFillCaretDownFill color="red"/> }</div>
 
             </li>
           </div>
@@ -123,47 +120,30 @@ class District extends Component {
 
   headerClick = (sortKey) => {
    
-     const def=true
-    const cardData = this.props.covidData.district
-    const object = this.props.covidData.dataObject
-    const homeData = this.props.covidData.data
-    const{sortBy}=this.props.covidData
-     const{isAsc}=this.state
-    this.setState(prev => ({
-      isAsc: !prev.isAsc
-    }))
- 
-     
+    const{district,dataObject,data,isAsc,sortBy}=this.props.covidData
+      
+   if(sortKey==sortBy)
+     {
+       this.props.districtData(district, dataObject, data,!isAsc,sortKey)
+     }
+     else{
+        this.props.districtData(district, dataObject, data,isAsc,sortKey)
 
-    this.props.districtData(cardData, object, homeData,isAsc,sortKey)
-
-    // if(sortKey==sortBy){
-
-
-    //  this.props.districtData(cardData,object,homeData,!isAscc,sortBy)
-    // }
-    //  else{
-    //        this.props.districtData(cardData,object,homeData,isAscc,sortBy)
-
-    //  }   
-  }
+     }
+  
+  } 
 
 
 
   inputHandler = (e) => {
     this.setState({ searchterm: e.target.value })
   }
-
+ 
 
   //FUNCTION TO SHOW DISTRICT DATA
   getDistrictUI = () => {
 
-
-  
-    console.log("befire",this.props.covidData.district)
-    const final = this.props.covidData.district ?? []
-    { console.log("after", final) }
-
+    const final = this.props.covidData.district ?? []   
     return (
       <>
         {final.map(item => {
@@ -201,7 +181,7 @@ class District extends Component {
       }
     }).map((val, i) => {
 
-      return <Link to={val} style={{ color: "white", textDecoration: "none" }}><div className="sta891Box">
+      return <Link to={val} style={{ color: "white", textDecoration: "none" }} ><div className="sta891Box">
         {State_List[val]}
       </div></Link>
 
@@ -229,8 +209,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
   return {
 
-    fetchStart: (d) => dispatch(fetchStart(d)),
+    fetchStart: (matchID) => dispatch(fetchStart(matchID)),
     districtData: (district, object, homeData,isAsc,sort) => dispatch(districtData(district, object, homeData,isAsc,sort)),
+    
   }
 }
 
@@ -238,18 +219,4 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(District);
 
-
-   
-
- //  <Card
-               //  confirmed={confirmed}
-               //  recovered={recovered}
-               //  tested={tested}
-               //  deceased={deceased}
-               //  vaccinated={vaccinated}         
-               // />
-
-
-
-
-
+    // setDistrictData:(matchID,dataObject)=>dispatch(setDistrictData(matchID,dataObject))

@@ -35,7 +35,7 @@ const mainreducer=(state=myState,action)=>{
           tested:action.indiaData.total.tested,
           vaccinated:action.indiaData.total.vaccinated,
           dataObject:action.dataObject,
-          district:action.district,
+          // district:action.district,
          
           
   	};
@@ -47,7 +47,13 @@ const mainreducer=(state=myState,action)=>{
    }
 
 
-
+  case 'SET_DISTRICT_DATA':
+  return{
+    dataObject:action.dataObject,
+    district:action.district,
+    data:action.data,
+    isAsc:!state.isAsc
+  }
 
    case 'SORT_HOME_DATA':
    const sorting=sortData(action.data,action.sortBy,action.isAsc) 
@@ -56,26 +62,22 @@ const mainreducer=(state=myState,action)=>{
     localStorage.setItem('sortBy',JSON.stringify(action.sortBy))
     localStorage.setItem('isAsc',JSON.stringify(action.isAsc))
 
-
    return{
        data:sorting,
        dataObject:action.dataObject,    
        sortBy:action.sortBy,
        isAsc:action.isAsc,
+       demo:null
       
    }
    
    case 'DISTRICT_DATA':
-  
-      // const districtKeys=Object.keys(action.dataob[action.match].districts)
     const sorted=sortDistrict(action.district,action.isAsc,action.sortBy)
-    console.log("sortedd",action.district)
    return{
-     match:action.match,
      district:sorted,
      dataObject:action.dataObject,
      data:action.data,
-     isAsc:action.isASc,
+     isAsc:action.isAsc,
      sortBy:action.sortBy
    }
    

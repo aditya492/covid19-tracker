@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchStart, districtData,setDistrictData } from '../../store/actions';
+import { fetchCovidData, districtData,setDistrictData } from '../../store/actions';
 import { Link } from 'react-router-dom';
 import NumberFormat from 'react-number-format';
 import axios from 'axios';
@@ -40,12 +40,18 @@ class District extends Component {
 
 
   componentDidMount() {
-    this.props.fetchStart(this.props.match.params.id)
+    this.props.fetchCovidData(this.props.match.params.id)
     console.log("covidDataa",this.props.covidData)
     // this.props.districtData( this.props.match.params.id,this.props.covidData.dataObject)
   }
   
   render() {
+
+
+     const setColor=localStorage.getItem('isAscDist')
+     const colorconvert=JSON.parse(setColor)
+     const setOrder=localStorage.getItem('sortByDist')
+     const convert=JSON.parse(setOrder)
 
 
     const loadingg = this.props.covidData.loading
@@ -68,6 +74,9 @@ class District extends Component {
     const vaccinated=loadingg ? null:cardData[reuseMatchid].total.vaccinated;
     
 
+
+   
+
     if (!reduxData.error) {
       return (
         <>
@@ -85,24 +94,14 @@ class District extends Component {
     />    
 
 
-          <div className="sta891Statediv28">
-
-            <input className="sta891stateInput shadow-5" onChange={(e) => this.inputHandler(e)} placeholder="&#128269; Enter Your State here" style={{ color: "white" }}></input>
-
-            <div className="sta891SearchResult">
-              <div className="sta891SearchResult"><h3 className="sta891ResultsRow">{loadingg ? <h1 style={{ textAlign: "center", color: "white" }}><BeatLoader color='white' /></h1> : this.filterInputUI()}</h3></div>
-            </div>
-
-          </div>
-
 
           <div className="sta891color_State_body">
             <li className="sta891Table_Header_">
-              <div className="sta891Col sta891Col-0"  style={sortBy==='district' ? {cursor:"pointer",color:"green"} : {cursor:"pointer",color:"red"}} onClick={() => this.headerClick('district')}>Districts {'district'===sortBy && isAsc?<BsFillCaretUpFill color="green"/>: <BsFillCaretDownFill color="red"/> }</div>
-              <div className="sta891Col sta891Col-1" style={sortBy==='confirm' ? {cursor:"pointer",color:"green"} : {cursor:"pointer",color:"red"}} onClick={() => this.headerClick('confirm')}>Confirmed {'confirm'===sortBy && isAsc?<BsFillCaretUpFill color="green"/>: <BsFillCaretDownFill color="red"/> }</div>
-              <div className="sta891Col sta891Col-2"  style={sortBy==='tested' ? {cursor:"pointer",color:"green"} : {cursor:"pointer",color:"red"}} onClick={() => this.headerClick('tested')}>Tested {'tested'===sortBy && isAsc?<BsFillCaretUpFill color="green"/>: <BsFillCaretDownFill color="red"/> }</div>
-              <div className="sta891Col sta891Col-3"  style={sortBy==='recover' ? {cursor:"pointer",color:"green"} : {cursor:"pointer",color:"red"}} onClick={() => this.headerClick('recover')}>Recovered {'recover'===sortBy && isAsc?<BsFillCaretUpFill color="green"/>: <BsFillCaretDownFill color="red"/> }</div>
-              <div className="sta891Col sta891Col-4"  style={sortBy==='deceased' ? {cursor:"pointer",color:"green"} : {cursor:"pointer",color:"red"}} onClick={() => this.headerClick('deceased')}>Deceased {'deceased'===sortBy && isAsc?<BsFillCaretUpFill color="green"/>: <BsFillCaretDownFill color="red"/> }</div>
+              <div className="sta891Col sta891Col-0"  style={convert==='states' ? {cursor:"pointer",color:"green"} : {cursor:"pointer",color:"red"}} onClick={() => this.headerClick('states')}>Districts {'states'===convert && colorconvert?<BsFillCaretUpFill color="green"/>: <BsFillCaretDownFill color="red"/> }</div>
+              <div className="sta891Col sta891Col-1" style={convert==='confirm' ? {cursor:"pointer",color:"green"} : {cursor:"pointer",color:"red"}} onClick={() => this.headerClick('confirm')}>Confirmed {'confirm'===convert && colorconvert?<BsFillCaretUpFill color="green"/>: <BsFillCaretDownFill color="red"/> }</div>
+              <div className="sta891Col sta891Col-2"  style={convert==='tested' ? {cursor:"pointer",color:"green"} : {cursor:"pointer",color:"red"}} onClick={() => this.headerClick('tested')}>Tested {'tested'===convert && colorconvert?<BsFillCaretUpFill color="green"/>: <BsFillCaretDownFill color="red"/> }</div>
+              <div className="sta891Col sta891Col-3"  style={convert==='recover' ? {cursor:"pointer",color:"green"} : {cursor:"pointer",color:"red"}} onClick={() => this.headerClick('recover')}>Recovered {'recover'===convert && colorconvert?<BsFillCaretUpFill color="green"/>: <BsFillCaretDownFill color="red"/> }</div>
+              <div className="sta891Col sta891Col-4"  style={convert==='deceased' ? {cursor:"pointer",color:"green"} : {cursor:"pointer",color:"red"}} onClick={() => this.headerClick('deceased')}>Deceased {'deceased'===convert && colorconvert?<BsFillCaretUpFill color="green"/>: <BsFillCaretDownFill color="red"/> }</div>
 
             </li>
           </div>
@@ -209,7 +208,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
   return {
 
-    fetchStart: (matchID) => dispatch(fetchStart(matchID)),
+    fetchCovidData: (matchID) => dispatch(fetchCovidData(matchID)),
     districtData: (district, object, homeData,isAsc,sort) => dispatch(districtData(district, object, homeData,isAsc,sort)),
     
   }

@@ -7,7 +7,7 @@ import {sortData} from '../reducers/sortlogic'
 
 
 
-export const  fetchStart=(matchid)=> async dispatch=>{
+export const  fetchCovidData=(matchid)=> async dispatch=>{
 
  dispatch(fetchRequest())
  try{
@@ -23,6 +23,9 @@ const getOrder=localStorage.getItem('isAsc')
 const convertOrder=JSON.parse(getOrder)
 
 
+
+
+
 if(!matchid){
    if(getData && getOrder )
   {
@@ -33,12 +36,22 @@ if(!matchid){
 
   }
 }
+
  else{
-     dispatch(setDistrictData(dataObject,data,matchid))
+    const district= districtItem(dataObject,matchid)
+      if(getData && getOrder){
+
+              dispatch(setDistrictData(dataObject,data,matchid,sortData(district,convertBack,convertOrder)))  
+       }
+     else{
+            dispatch(setDistrictData(dataObject,data,matchid,district))   
+         }
+    }
 
  }
 
-} catch(err){
+
+catch(err){
 	dispatch(error(err))
   }
 
@@ -63,9 +76,9 @@ export const fetchSuccess=(users,indiaData,dataObject)=>{
 	}
 }
 
-export const setDistrictData=(dataObject,homeData,matchID)=>{
+export const setDistrictData=(dataObject,homeData,matchID,district)=>{
   console.log("setdistrictdata")
-   const district= districtItem(dataObject,matchID) 
+   // const district= districtItem(dataObject,matchID) 
    return{
        type:SET_DISTRICT_DATA,
        dataObject:dataObject,
@@ -117,4 +130,4 @@ export const error=(err)=>{
 
 
 
-
+export default fetchCovidData;

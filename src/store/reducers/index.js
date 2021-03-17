@@ -3,7 +3,6 @@ import {sortData,sortDistrict} from './sortlogic';
 const myState={
 	        
           loading:true,
-          districts:[],
           data:[],
           isAsc:false,
        
@@ -72,7 +71,11 @@ const mainreducer=(state=myState,action)=>{
    }
    
    case 'DISTRICT_DATA':
-    const sorted=sortDistrict(action.district,action.isAsc,action.sortBy)
+    const sorted=sortData(action.district,action.sortBy,action.isAsc)
+
+     localStorage.setItem('sortByDist',JSON.stringify(action.sortBy))
+    localStorage.setItem('isAscDist',JSON.stringify(action.isAsc))
+
    return{
      district:sorted,
      dataObject:action.dataObject,

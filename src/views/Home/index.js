@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import axios from 'axios';
 import  {connect } from 'react-redux';      //redux part
-import  {fetchStart,sortAsc} from '../../store/actions';
+import  {fetchCovidData,sortAsc} from '../../store/actions';
 import {Link} from 'react-router-dom';
 import NumberFormat from 'react-number-format';
 import {BeatLoader} from 'react-spinners';
@@ -44,7 +44,7 @@ arrowMove:true
 
 
 componentDidMount(){
-this.props.fetchStart()
+this.props.fetchCovidData()
 
 
 }
@@ -262,7 +262,7 @@ return {covidData:state.covidData,};
 const mapDispatchToProps=(dispatch)=>{
   return{
     sortconf:(final,sortBy,dataObject,isAsc)=>dispatch(sortAsc(final,sortBy,dataObject,isAsc)),
-    fetchStart:()=>dispatch(fetchStart())
+    fetchCovidData:()=>dispatch(fetchCovidData())
   }
 }
 

@@ -9,7 +9,6 @@ import {BsSearch,BsFillCaretDownFill,BsFillCaretUpFill} from "react-icons/bs";
 
 
 import State_List from '../../helper/Statelist';
-import getCovidData from '../../utils/Storage';
 import { distArray } from '../../utils/distArray'
 
 
@@ -93,6 +92,16 @@ class District extends Component {
      vaccinated={vaccinated}         
     />    
 
+
+          <div className="sta891Statediv28">
+
+            <input className="sta891stateInput shadow-5" onChange={(e) => this.inputHandler(e)} placeholder="&#128269; Enter Your State here" style={{ color: "white" }}></input>
+
+            <div className="sta891SearchResult">
+              <div className="sta891SearchResult"><h3 className="sta891ResultsRow">{loadingg ? <h1 style={{ textAlign: "center", color: "white" }}><BeatLoader color='white' /></h1> : this.filterInputUI()}</h3></div>
+            </div>
+
+          </div>
 
 
           <div className="sta891color_State_body">

@@ -182,15 +182,15 @@ return <Link to={"state/"+reuseStatedata.id} style={{textDecoration:"none"}}>
     
     <div className="sta891Col   sta891Col-0">{State_List[reuseStatedata.id]}</div>
     
-    <div className="sta891Col   sta891Col-1"><NumberFormat value={reuseStatedata.confirmed} displayType={'text'} thousandSeparator={true}/></div>
+    <div className="sta891Col   sta891Col-1">{isNaN(reuseStatedata.confirmed) ? "--" : <NumberFormat value={reuseStatedata.confirmed} displayType={'text'} thousandSeparator={true}/>}</div>
     
-    <div className="sta891Col   sta891Col-2"><NumberFormat value={reuseStatedata.tested} displayType={'text'} thousandSeparator={true}/></div>
+    <div className="sta891Col   sta891Col-2">{isNaN(reuseStatedata.tested) ? "--" : <NumberFormat value={reuseStatedata.tested} displayType={'text'} thousandSeparator={true}/>}</div>
     
-    <div className="sta891Col   sta891Col-3"><NumberFormat value={reuseStatedata.recovered} displayType={'text'} thousandSeparator={true}/></div>
+    <div className="sta891Col   sta891Col-3">{isNaN(reuseStatedata.recovered) ? "--" : <NumberFormat value={reuseStatedata.recovered} displayType={'text'} thousandSeparator={true}/>}</div>
    
-    <div className="sta891Col   sta891Col-4"><NumberFormat value={reuseStatedata.deceased} displayType={'text'} thousandSeparator={true}/></div>
+    <div className="sta891Col   sta891Col-4">{isNaN(reuseStatedata.deceased) ? "--" : <NumberFormat value={reuseStatedata.deceased} displayType={'text'} thousandSeparator={true}/>}</div>
    
-    <div className="sta891Col   sta891Col-5"><NumberFormat value={reuseStatedata.vaccinated} displayType={'text'} thousandSeparator={true}/></div>
+    <div className="sta891Col   sta891Col-5">{isNaN(reuseStatedata.vaccinated) ? "--" :<NumberFormat value={reuseStatedata.vaccinated} displayType={'text'} thousandSeparator={true}/>}</div>
     
   </li>
   

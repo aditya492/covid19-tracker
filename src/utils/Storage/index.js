@@ -1,14 +1,36 @@
+import axios from 'axios';
+import lscache from 'lscache';
 
-const htmlEl = document.getElementsByTagName('html')[ 0 ];
-const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : localStorage.setItem('theme', 'light');
 
+const getCovidData=async()=>{
+ const localData=lscache.get("covid")
 
-if (currentTheme) {
-  htmlEl.dataset.theme = currentTheme;
+ if(localData){
+ 	return new Promise(resolve=>resolve(JSON.parse(localData)))
+ }
+
+ else{ 
+ 	try{
+       const resp= await axios.get("https://api.covid19india.org/v4/min/data.min.json")
+        	 	lscache.set("covid",JSON.stringify(resp),60)
+        	 	 return new Promise(resolve=> resolve(resp)) 
+ 	} catch(err){
+ 		
+ 	}
+ }
 }
 
-export const toggleTheme = (theme) => {
-	console.log("utils",theme)
-  htmlEl.dataset.theme = theme;
-  localStorage.setItem('theme', theme);
+export const setLocalData=(key,value)=>{
+   const storage=localStorage.setItem(key,JSON.stringify(value))
+  return storage;
 }
+
+export const getLocalData=(getValue)=>{
+	const storage=localStorage.getItem(getValue)
+	return storage;
+}
+
+
+export default getCovidData;
+
+

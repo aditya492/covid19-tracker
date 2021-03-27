@@ -1,10 +1,13 @@
 export const sortData=(reduxData,sortBy,isAsc)=>{
     
+   
+   
     switch(sortBy){
 
     	case 'states':
     	  if(isAsc){
     	  	 const StatesData=reduxData.sort((a,b)=>(a.name).localeCompare(b.name))
+    	 
 		  return StatesData
           break;
     	  }
@@ -26,6 +29,8 @@ export const sortData=(reduxData,sortBy,isAsc)=>{
 	      return DeceasedData
 		  break;
 		}
+
+		 
 
 	  case 'recover':
 	      if(isAsc){

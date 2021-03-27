@@ -1,25 +1,30 @@
 import React from 'react'
 import axios from 'axios';
+
 import{FETCH_REQUEST,FETCH_SUCCESS,ERROR,SORT_HOME_DATA,DISTRICT_DATA,SET_DISTRICT_DATA} from '../actioncreator'
+
+import {getLocalData} from '../../utils/storage'
 import {tabledatatoarr,districtItem} from '../../utils/MaptoArr';
+import getCovidData from '../../utils/storage'
+
+
 import State_List from '../../helper/Statelist'
 import {sortData} from '../reducers/sortlogic'
 
 
-
 export const  fetchCovidData=(matchid)=> async dispatch=>{
-
  dispatch(fetchRequest())
  try{
-const response= await axios.get("https://api.covid19india.org/v4/min/data.min.json");
+const response=await getCovidData();
+
 const dataObject=response.data
 const data=tabledatatoarr(response.data)
 const indiaData=response.data['TT'];
 
-const getData=localStorage.getItem('sortBy')
+const getData=getLocalData('sortBy')
 const convertBack=JSON.parse(getData)
 
-const getOrder=localStorage.getItem('isAsc')
+const getOrder=getLocalData('isAsc')
 const convertOrder=JSON.parse(getOrder)
 
 

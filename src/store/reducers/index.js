@@ -1,4 +1,6 @@
 import {sortData,sortDistrict} from './sortlogic';
+import {setLocalData} from '../../utils/storage'
+
 
 const myState={
 	        
@@ -58,8 +60,10 @@ const mainreducer=(state=myState,action)=>{
    const sorting=sortData(action.data,action.sortBy,action.isAsc) 
    
      
-    localStorage.setItem('sortBy',JSON.stringify(action.sortBy))
-    localStorage.setItem('isAsc',JSON.stringify(action.isAsc))
+    // localStorage.setItem('sortBy',JSON.stringify(action.sortBy))
+    // localStorage.setItem('isAsc',JSON.stringify(action.isAsc))
+    setLocalData('sortBy',action.sortBy)
+    setLocalData('isAsc',action.isAsc)
 
    return{
        data:sorting,
@@ -73,8 +77,12 @@ const mainreducer=(state=myState,action)=>{
    case 'DISTRICT_DATA':
     const sorted=sortData(action.district,action.sortBy,action.isAsc)
 
-     localStorage.setItem('sortByDist',JSON.stringify(action.sortBy))
-    localStorage.setItem('isAscDist',JSON.stringify(action.isAsc))
+    //  localStorage.setItem('sortByDist',JSON.stringify(action.sortBy))
+    // localStorage.setItem('isAscDist',JSON.stringify(action.isAsc))
+
+    setLocalData('sortByDist',action.sortBy)
+    setLocalData('isAscDist',action.isAsc)
+
 
    return{
      district:sorted,

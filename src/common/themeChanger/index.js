@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {BiSun,BiMoon} from "react-icons/bi";
 
-import { toggleTheme } from '../../utils/Storage';
+import { toggleTheme } from '../../utils/theme';
 
 import './themeChanger.css';
 

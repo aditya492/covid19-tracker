@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import {Line,Bar} from 'react-chartjs-2'
+import {Line,Bar,Radar,Pie} from 'react-chartjs-2'
 import axios from 'axios'
 import {tabledatatoarr} from '../../utils/MaptoArr'
 import getCovidData from '../../utils/storage'
@@ -62,6 +62,87 @@ useEffect(()=>{
    
       	
        )
+
+
+ const barchart=(
+
+        dailyData.length ? (<Radar
+        	 width={1800}
+        	 height={1800}
+      	     data={{ 
+      	     	labels:dailyData.map((item)=> item.name),
+      	     	datasets:[{
+      	     		data:dailyData.map((item)=>item.confirmed),
+      	     		label:'confirmed',
+      	     		borderColor:'red',
+                    fill:true,
+
+      	     	},{
+      	     		data:dailyData.map((item)=>item.deceased),
+      	     		label:'deceased',
+      	     		borderColor:'blue',
+                    fill:true,
+                },{
+      	     		data:dailyData.map((item)=>item.tested),
+      	     		label:'tested',
+      	     		borderColor:'green',
+                    fill:true,
+                },{
+      	     		data:dailyData.map((item)=>item.recovered),
+      	     		label:'recovered',
+      	     		borderColor:'orange',
+                    fill:true,
+                }],
+                 options:{responsive:true, height:'10'},
+                
+      	    
+      	     }}
+      	/>):null
+            
+      
+
+   
+      	
+       )
+       
+    
+      const bubblechart=(
+
+        dailyData.length ? (<Pie
+        	 width={1800}
+        	 height={1800}
+      	     data={{ 
+      	     	labels:dailyData.map((item)=> item.name),
+      	     	datasets:[{
+      	     		data:dailyData.map((item)=>item.confirmed),
+      	     		label:'confirmed',
+      	     		borderColor:'red',
+                    fill:true,
+
+      	     	},{
+      	     		data:dailyData.map((item)=>item.deceased),
+      	     		label:'deceased',
+      	     		borderColor:'blue',
+                    fill:true,
+                },{
+      	     		data:dailyData.map((item)=>item.tested),
+      	     		label:'tested',
+      	     		borderColor:'green',
+                    fill:true,
+                },{
+      	     		data:dailyData.map((item)=>item.recovered),
+      	     		label:'recovered',
+      	     		borderColor:'orange',
+                    fill:true,
+                }],
+                 options:{responsive:true, height:'10'},
+                
+      	    
+      	     }}
+      	/>):null
+            
+      	
+       )
        
 
  
@@ -71,6 +152,8 @@ return(
 	<>
     <div style={{textAlign:"center",color:"white"}}><h1>Graph Representation</h1><small>StateWise Data</small></div>
     <div className="chartss">{lineChart}</div>
+    <div className="chartss">{barchart}</div>
+    <div className="chartss">{bubblechart}</div>
 	</>
 	)
 

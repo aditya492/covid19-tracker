@@ -1,5 +1,4 @@
 
-
 const Time = (date) => {
   let seconds = Math.floor((new Date() - date)/1000);
 

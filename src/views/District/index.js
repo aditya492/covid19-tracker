@@ -11,6 +11,7 @@ import {BsSearch,BsFillCaretDownFill,BsFillCaretUpFill} from "react-icons/bs";
 import State_List from '../../helper/Statelist';
 import { distArray } from '../../utils/distArray'
 
+import Chart from '../Chart'
 
 import Card from '../../common/Card';
 import StateSearchBar  from '../../common/StateSearchBar'
@@ -91,7 +92,8 @@ class District extends Component {
      deceased={deceased}
      vaccinated={vaccinated}         
     />    
-
+        
+         
 
           <div className="sta891Statediv28">
 
@@ -169,6 +171,7 @@ class District extends Component {
             </ul>
           </div>
         })}
+
       </>
     )
   }
@@ -197,7 +200,7 @@ class District extends Component {
     return (
       <>
         {statemapping}
-
+        
 
       </>
 

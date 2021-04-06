@@ -3,6 +3,7 @@ import ReactDOM   from 'react-dom';
 import {BrowserRouter,Route,Link,Switch} from 'react-router-dom';
 import Home from './views/Home';
 import Errorr from './views/Errorr';
+import Chart from './views/Chart';
 import District from './views/District';
 import {Provider} from 'react-redux';
 import {createStore,applyMiddleware} from 'redux';
@@ -17,7 +18,8 @@ ReactDOM.render(<Provider store={store}>
            <div>
            <Switch>
            <Route path="/" exact component={Home}/>
-           <Route path="/state/:id" component={District}/>                      
+           <Route path="/state/:id" component={District}/>
+           <Route path="/stateschart" component={Chart}/>                      
            <Route component={Errorr}/>
            
            </Switch>

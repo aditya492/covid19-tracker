@@ -16,6 +16,8 @@ import {GiHypodermicTest,GiConfirmed,GiAbstract033} from "react-icons/gi";
 import Notification from '../notification';
 import Sidebar from '../Sidebar'
 
+import Chart from '../Chart'
+
 import Card from '../../common/Card'
 import StateSearchBar from '../../common/StateSearchBar';
 import {ThemeChanger} from '../../common/themeChanger'
@@ -82,6 +84,8 @@ return(
 </div>
 
 
+  
+
  <div className="sta891main001">
   {reduxData.loading ? <h1 style={{textAlign:"center",color:"white"}}><BeatLoader color='white'/></h1> : <Card
   confirmed={reduxData.confirmed}
@@ -118,6 +122,8 @@ return(
 
 <div style={{marginLeft:"110px"}}>{this.getStateTableUI()}</div>
 
+
+<div className="sta891chartDesign"><Link to="/stateschart">Chart</Link></div>
 
 </>
 

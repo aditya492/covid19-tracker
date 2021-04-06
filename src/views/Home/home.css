@@ -74,6 +74,11 @@ display: flex;
 
 }
 
+.sta891chartDesign{
+  text-align: center;
+  color: white;
+}
+
 .sta891SecondaryMap{ 
 	float:left;
 }

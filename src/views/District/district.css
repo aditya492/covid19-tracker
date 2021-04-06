@@ -38,3 +38,10 @@ font-family: 'Roboto'
      border-bottom: 2px solid;
     border-bottom-color: darkgray;
   }
+
+
+  .chart{
+    text-align: center;
+    color: white;
+
+  }

@@ -8,6 +8,7 @@ import District from './views/District';
 import {Provider} from 'react-redux';
 import {createStore,applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
+import ScrollToTop from './views/ScrollToTop';
 
 import combinereducers from './store/reducers/combinereducer';
 
@@ -15,7 +16,9 @@ const store=createStore(combinereducers,applyMiddleware(thunk));
 
 ReactDOM.render(<Provider store={store}>
 	<BrowserRouter>
+         
            <div>
+           <ScrollToTop/>
            <Switch>
            <Route path="/" exact component={Home}/>
            <Route path="/state/:id" component={District}/>
@@ -23,6 +26,7 @@ ReactDOM.render(<Provider store={store}>
            <Route component={Errorr}/>
            
            </Switch>
+          
           </div>
           </BrowserRouter>
           </Provider>

@@ -54,7 +54,6 @@ this.props.fetchCovidData()
 
 
 
-
 render(){
 
 
@@ -79,7 +78,7 @@ return(
       <Sidebar/>
 
      <Notification/> <ThemeChanger/>
-
+  <div id="as"></div>
 <div style={{marginTop:"12px"}}>
   <h2 className="sta891HomeIndia">India</h2>
 </div>
@@ -124,8 +123,7 @@ return(
 <div style={{marginLeft:"110px"}}>{this.getStateTableUI()}</div>
 
 
-<div className="sta891chartDesign"><Link to="/stateschart">Chart</Link></div>
-
+<div style={{textAlign:"center",color:"white",cursor:"pointer",scrollBehavior:"smooth"}} onClick={()=>this.getPosition()}> <h2>Go to top</h2></div>
 </>
 
 )
@@ -209,6 +207,14 @@ return <Link to={"state/"+reuseStatedata.id} style={{textDecoration:"none"}}>
 </>
 )
 }
+
+
+
+getPosition=()=>{
+  //  window.scrollTo(4031,0)
+   window.scrollTo({top:0,behavior:'smooth'})
+
+ }
 
 
 //FUNCTION to show search input

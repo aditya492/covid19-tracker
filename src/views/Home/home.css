@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap');
+*{
+margin: 0px;
+padding: 0px;
+background:#161625;
+}
+.sta891VaccineStatus{
+  text-align: center;
+  color: green;
+    font-family: 'Roboto';
+}
+
+.sta891stateInput{
+    margin: auto;
+    display: block;
+    width: 96%;
+    padding: 16px;
+    border-radius: 0px;
+    font-family: 'Roboto';
+    position: relative;
+    background:#1e1e30;
+   
+    font-size: 18px;
+}
+.sta891MainH1{
+text-align: center;
+ font-family: 'Roboto';
+word-spacing:11px;
+letter-spacing: 7px;
+text-shadow: 2px 2px 2px ;
+margin-top: 21px;
+color:cornsilk;
+
+}
+.sta891MainSpan{
+  display: flex;
+    justify-content: center;
+}
+
+
+.sta891Mainstates{
+display: flex;
+
+}
+
+.sta891Box{
+  
+   padding:19px;
+   transition: all .2s ease-in-out;
+   border-bottom:4px solid rgba(108,117,170,.06274509803921569);
+}
+.sta891Box:hover{
+	background-color:rgba(108,117,125,.06274509803921569);
+	transition: all .9s ease;
+  z-index: 1000;
+}
+.sta891color_State_body{
+  position: sticky;
+  top:0;
+  margin-left:113px;
+  border-bottom: 2px solid;
+  border-bottom-color: darkgray;
+  z-index: 1;
+}
+/*.container{
+  margin-top: -36px;
+}*/
+.sta891Statediv28{
+	width:56%;
+	border:none;
+	box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0px 2px 4px 8px rgba(0,0,0,.18);
+	margin: auto;
+  margin-top: 34px;
+
+}
+
+.sta891chartDesign{
+  text-align: center;
+  color: white;
+}
+
+.sta891SecondaryMap{ 
+	float:left;
+}
+h3{
+color:black;
+}
+
+.sta891HomeIndia{
+    font-size: 36px;
+    text-shadow: 1px 1px chartreuse;
+    margin-bottom: 23px;
+    display: flex;
+    justify-content: center;
+    color: sandybrown;
+    margin-left: 67px;
+}
+.sta891SearchResult{
+  position: relative;
+  width: 100%;
+  z-index:10;
+  font-family: 'Roboto';
+
+}
+.sta891ResultsRow{
+  position: absolute;
+  width: 100%;
+ 
+}
+.sta891TableRow{
+	  display: flex;
+    justify-content: space-evenly;
+}
+
+.sta891CurrentDate{
+  display:flex;
+  justify-content: center;
+  margin-top: 19px;
+}
+
+h3{
+color:white;
+}
+
+
+  li{
+    border-radius: 3px;
+    padding: 25px 30px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+  }
+   .sta891Table_Header_ {
+    font-family: 'Roboto';
+    font-size: 19px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-top: 70px;
+    font-weight: bolder;
+
+  }
+
+ .headingcolor{
+  color:green;
+ }
+
+  .sta891CommenHover:hover{
+    background:gray;
+  }
+
+  .sta891Statedata_table_row{
+    
+    box-shadow: 0px 0px 12px 12px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Roboto'
+  }
+  
+  .sta891Col-0{
+  	flex-basis:48%;
+    
+  }
+  .sta891Col-1 {
+    flex-basis: 40%;
+    
+  }
+  .sta891Col-2 {
+    flex-basis: 44%;
+    
+  }
+  .sta891Col-3 {
+    flex-basis: 41%;
+   
+  }
+  .sta891Col-4 {
+    flex-basis: 33%;
+    
+  }
+  .sta891Col-5{
+    flex-basis:27%;
+    
+  }
+  .sta891Col{
+    color: white;
+  }
+
+
+
+
+
+
+ 
+ 

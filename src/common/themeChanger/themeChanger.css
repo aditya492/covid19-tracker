@@ -1,0 +1,17 @@
+.i01themeIcon{
+    flex-grow: 1;
+    padding-left: 8%;
+    padding-right: 3%;
+    cursor:default;
+}
+
+.sta891moon,.sta891sun{
+    cursor: pointer;
+
+}
+
+
+html[data-theme='dark'] {
+   
+    filter:  invert(1)  hue-rotate(180deg)
+}

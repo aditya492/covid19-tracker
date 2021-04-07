@@ -1,0 +1,17 @@
+
+.errorr004{
+	height: 200px;
+	width: 400px;
+	display: flex;
+	justify-content: center;
+	border:1px solid black;
+	align-items: center;
+	background-color:grey;
+}
+.mainerror003{
+display: flex;
+justify-content: center;
+align-items: center;
+margin-top: 200px;
+background-color: lightblue;
+}

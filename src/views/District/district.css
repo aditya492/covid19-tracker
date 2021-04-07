@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap');
+
+
+.sta891ButtonStyle{ 
+  border: none;
+  color: white;
+  border-radius: 21px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.sta891Cardh1C1{
+letter-spacing: 2px;
+margin-left: 609px;
+text-shadow: 1px 1px blue;
+height:61px;
+color:antiquewhite;
+font-family: 'Roboto'
+}
+.sta891HomeLinkHL{
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+  margin-top: 56px;
+}
+.sta891ButtonStyle{
+  padding: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.sta891color_State_body_District {
+    position: sticky;
+    top: 0;
+    margin-left: -5px;
+     border-bottom: 2px solid;
+    border-bottom-color: darkgray;
+  }
+
+
+  .chart{
+    text-align: center;
+    color: white;
+
+  }

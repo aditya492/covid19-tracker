@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap');
+
+.sta891CommonInAll{
+    height: 249px;
+    width: 177px;
+    border: thick;
+    font-family: 'Roboto';
+    transform: translateX(408px);
+    border: 2px;
+    margin: 77px;
+    margin-left: 3px;
+
+	/*background:transparent;
+	 -moz-box-shadow: 0 0 10px #ccc;
+      -webkit-box-shadow: 0 0 10px #ccc;
+      align-items: center;
+     background-color: white;*/
+}
+
+.sta891pardsprimary1{
+	color: orangered;
+}
+.sta891pardsprimary2{
+	
+    color: cornflowerblue;
+}	
+.sta891pardsprimary3{
+	color:#008b8b;
+}	
+.sta891pardsprimary4{	
+	color:aquamarine;
+}	
+.sta891pardsprimary5{
+  color:#228B22;
+}
+.sta891CardMain{
+	display: inline-flex;
+	justify-content:space-evenly;
+	margin:40px; 
+	margin:-21px;
+	padding: 35px;
+  margin-left: -248px;
+}
+.sta891CommonInAll:hover{	 
+   -webkit-transition: all .6s ease;
+    -moz-box-shadow: 0 0 10px #ccc;
+    -webkit-box-shadow: 0 0 10px #ccc;
+     box-shadow: 0 0 10px #ccc;      
+}
+.sta891InsideCard{
+	display: flex;
+	justify-content: center;
+    margin-top:50px;
+}
+.sta891card1{
+  color: orangered;
+}
+.sta891card2{
+  color: cornflowerblue;
+}
+.sta891card3{
+  color: #008b8b;
+}
+.sta891card4{
+  color: aquamarine;
+}
+.sta891card5{
+  color: #228b22;
+}
+
+

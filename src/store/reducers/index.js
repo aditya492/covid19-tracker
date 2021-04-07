@@ -1,5 +1,5 @@
 import {sortData,sortDistrict} from './sortlogic';
-import {setLocalData} from '../../utils/storage'
+import {setLocalData} from '../../utils/Storage'
 
 
 const myState={

@@ -3,9 +3,9 @@ import axios from 'axios';
 
 import{FETCH_REQUEST,FETCH_SUCCESS,ERROR,SORT_HOME_DATA,DISTRICT_DATA,SET_DISTRICT_DATA} from '../actioncreator'
 
-import {getLocalData} from '../../utils/storage'
+import {getLocalData} from '../../utils/Storage'
 import {tabledatatoarr,districtItem} from '../../utils/MaptoArr';
-import getCovidData from '../../utils/storage'
+import getCovidData from '../../utils/Storage'
 
 
 import State_List from '../../helper/Statelist'

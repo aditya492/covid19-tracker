@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import {Line,Bar,Radar,Pie} from 'react-chartjs-2'
 import axios from 'axios'
 import {tabledatatoarr} from '../../utils/MaptoArr'
-import getCovidData from '../../utils/storage'
+import getCovidData from '../../utils/Storage'
 import './chart.css'
 
 

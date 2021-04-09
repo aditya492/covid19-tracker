@@ -8,7 +8,6 @@ if (currentTheme) {
 }
 
 export const toggleTheme = (theme) => {
-	console.log("utils",theme)
   htmlEl.dataset.theme = theme;
   localStorage.setItem('theme', theme);
 }

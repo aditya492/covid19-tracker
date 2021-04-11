@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Fire from "../../helper/Fire";
 import "./login.css";
+import { BounceLoader } from "react-spinners";
 
 class Login extends Component {
   constructor(props) {
@@ -8,22 +9,31 @@ class Login extends Component {
     this.state = {
       email: "",
       password: "",
+      loadingIn: false,
+      loadingUp: false,
     };
   }
 
   login = (e) => {
+    this.setState({
+      loadingIn: true,
+    });
     e.preventDefault();
     Fire.auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
       .then((u) => {
         console.log(u);
+        this.setState({
+          loadingIn: false,
+        });
       })
       .catch((err) => {
-        alert("Please SignUp with your Email ID");
+        alert(err.message);
         console.log(err);
         this.setState({
           email: "",
           password: "",
+          loadingIn: false,
         });
       });
   };
@@ -35,13 +45,24 @@ class Login extends Component {
   };
 
   signup = (e) => {
+    this.setState({
+      loadingUp: true,
+    });
     e.preventDefault();
     Fire.auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then((u) => {
         console.log(u);
+        this.setState({
+          loadingUp: false,
+        });
       })
       .catch((err) => {
+        this.setState({
+          email: "",
+          password: "",
+          loadingUp: false,
+        });
         alert(err.message);
         console.log(err);
       });
@@ -77,12 +98,24 @@ class Login extends Component {
                   onChange={(e) => this.handlechange(e)}
                 />
               </div>
-              <button type="button" className="btn" onClick={this.login}>
-                Log In
-              </button>
-              <button type="button" className="btn" onClick={this.signup}>
-                Signup
-              </button>
+              {this.state.loadingIn ? (
+                <button type="button" className="btn" onClick={this.login}>
+                  Loading.......
+                </button>
+              ) : (
+                <button type="button" className="btn" onClick={this.login}>
+                  Log In
+                </button>
+              )}
+              {this.state.loadingUp ? (
+                <button type="button" className="btn" onClick={this.signup}>
+                  Loading....
+                </button>
+              ) : (
+                <button type="button" className="btn" onClick={this.signup}>
+                  Signup
+                </button>
+              )}
             </form>
           </div>
         </div>

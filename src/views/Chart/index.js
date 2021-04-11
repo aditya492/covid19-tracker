@@ -1,183 +1,149 @@
-import React,{useState,useEffect} from 'react'
-import {Line,Bar,Radar,Pie} from 'react-chartjs-2'
-import axios from 'axios'
-import {tabledatatoarr} from '../../utils/MaptoArr'
-import getCovidData from '../../utils/Storage'
-import './chart.css'
+import React, { useState, useEffect } from "react";
+import { Line, Bar, Radar, Pie } from "react-chartjs-2";
+import axios from "axios";
+import { tabledatatoarr } from "../../utils/MaptoArr";
+import getCovidData from "../../utils/Storage";
+import "./chart.css";
 
+const Chart = () => {
+  const [dailyData, setDailyData] = useState([]);
 
+  useEffect(() => {
+    const fetchapi = async () => {
+      const fetchdata = await axios.get(
+        "https://api.covid19india.org/v4/min/data.min.json"
+      );
+      setDailyData(tabledatatoarr(fetchdata.data));
+    };
+    console.log(dailyData);
+    fetchapi();
+  });
 
-const Chart=()=>{
-	const[dailyData,setDailyData]=useState([])
+  const lineChart = dailyData.length ? (
+    <Line
+      width={1800}
+      height={1800}
+      data={{
+        labels: dailyData.map((item) => item.name),
+        datasets: [
+          {
+            data: dailyData.map((item) => item.confirmed),
+            label: "confirmed",
+            borderColor: "red",
+            fill: true,
+          },
+          {
+            data: dailyData.map((item) => item.deceased),
+            label: "deceased",
+            borderColor: "blue",
+            fill: true,
+          },
+          {
+            data: dailyData.map((item) => item.tested),
+            label: "tested",
+            borderColor: "green",
+            fill: true,
+          },
+          {
+            data: dailyData.map((item) => item.recovered),
+            label: "recovered",
+            borderColor: "orange",
+            fill: true,
+          },
+        ],
+        options: { responsive: true, height: "10" },
+      }}
+    />
+  ) : null;
 
-useEffect(()=>{
+  const barchart = dailyData.length ? (
+    <Radar
+      width={1800}
+      height={1800}
+      data={{
+        labels: dailyData.map((item) => item.name),
+        datasets: [
+          {
+            data: dailyData.map((item) => item.confirmed),
+            label: "confirmed",
+            borderColor: "red",
+            fill: true,
+          },
+          {
+            data: dailyData.map((item) => item.deceased),
+            label: "deceased",
+            borderColor: "blue",
+            fill: true,
+          },
+          {
+            data: dailyData.map((item) => item.tested),
+            label: "tested",
+            borderColor: "green",
+            fill: true,
+          },
+          {
+            data: dailyData.map((item) => item.recovered),
+            label: "recovered",
+            borderColor: "orange",
+            fill: true,
+          },
+        ],
+        options: { responsive: true, height: "10" },
+      }}
+    />
+  ) : null;
 
-  const fetchapi=async()=>{
-         
-          const fetchdata=await axios.get('https://api.covid19india.org/v4/min/data.min.json')
-        setDailyData(tabledatatoarr(fetchdata.data))  
-        
-	}
-       console.log(dailyData)
-	fetchapi()
-})
+  const bubblechart = dailyData.length ? (
+    <Pie
+      width={1800}
+      height={1800}
+      data={{
+        labels: dailyData.map((item) => item.name),
+        datasets: [
+          {
+            data: dailyData.map((item) => item.confirmed),
+            label: "confirmed",
+            borderColor: "red",
+            fill: true,
+          },
+          {
+            data: dailyData.map((item) => item.deceased),
+            label: "deceased",
+            borderColor: "blue",
+            fill: true,
+          },
+          {
+            data: dailyData.map((item) => item.tested),
+            label: "tested",
+            borderColor: "green",
+            fill: true,
+          },
+          {
+            data: dailyData.map((item) => item.recovered),
+            label: "recovered",
+            borderColor: "orange",
+            fill: true,
+          },
+        ],
+        options: { responsive: true, height: "10" },
+      }}
+    />
+  ) : null;
 
- const lineChart=(
-
-        dailyData.length ? (<Line
-        	 width={1800}
-        	 height={1800}
-      	     data={{ 
-      	     	labels:dailyData.map((item)=> item.name),
-      	     	datasets:[{
-      	     		data:dailyData.map((item)=>item.confirmed),
-      	     		label:'confirmed',
-      	     		borderColor:'red',
-                    fill:true,
-
-      	     	},{
-      	     		data:dailyData.map((item)=>item.deceased),
-      	     		label:'deceased',
-      	     		borderColor:'blue',
-                    fill:true,
-                },{
-      	     		data:dailyData.map((item)=>item.tested),
-      	     		label:'tested',
-      	     		borderColor:'green',
-                    fill:true,
-                },{
-      	     		data:dailyData.map((item)=>item.recovered),
-      	     		label:'recovered',
-      	     		borderColor:'orange',
-                    fill:true,
-                }],
-                 options:{responsive:true, height:'10'},
-                
-      	    
-      	     }}
-      	/>):null
-            
-      
-
-   
-      	
-       )
-
-
- const barchart=(
-
-        dailyData.length ? (<Radar
-        	 width={1800}
-        	 height={1800}
-      	     data={{ 
-      	     	labels:dailyData.map((item)=> item.name),
-      	     	datasets:[{
-      	     		data:dailyData.map((item)=>item.confirmed),
-      	     		label:'confirmed',
-      	     		borderColor:'red',
-                    fill:true,
-
-      	     	},{
-      	     		data:dailyData.map((item)=>item.deceased),
-      	     		label:'deceased',
-      	     		borderColor:'blue',
-                    fill:true,
-                },{
-      	     		data:dailyData.map((item)=>item.tested),
-      	     		label:'tested',
-      	     		borderColor:'green',
-                    fill:true,
-                },{
-      	     		data:dailyData.map((item)=>item.recovered),
-      	     		label:'recovered',
-      	     		borderColor:'orange',
-                    fill:true,
-                }],
-                 options:{responsive:true, height:'10'},
-                
-      	    
-      	     }}
-      	/>):null
-            
-    
-   
-      	
-       )
-       
-    
-      const bubblechart=(
-
-        dailyData.length ? (<Pie
-        	 width={1800}
-        	 height={1800}
-      	     data={{ 
-      	     	labels:dailyData.map((item)=> item.name),
-      	     	datasets:[{
-      	     		data:dailyData.map((item)=>item.confirmed),
-      	     		label:'confirmed',
-      	     		borderColor:'red',
-                    fill:true,
-
-      	     	},{
-      	     		data:dailyData.map((item)=>item.deceased),
-      	     		label:'deceased',
-      	     		borderColor:'blue',
-                    fill:true,
-                },{
-      	     		data:dailyData.map((item)=>item.tested),
-      	     		label:'tested',
-      	     		borderColor:'green',
-                    fill:true,
-                },{
-      	     		data:dailyData.map((item)=>item.recovered),
-      	     		label:'recovered',
-      	     		borderColor:'orange',
-                    fill:true,
-                }],
-                 options:{responsive:true, height:'10'},
-                
-      	    
-      	     }}
-      	/>):null
-            
-      	
-       )
-       
-
- 
-return(
-
-
-	<>
-    <div style={{textAlign:"center",color:"white"}}><h1>Graph Representation</h1><small>StateWise Data</small></div>
-    <div className="chartss">{lineChart}</div>
-    <div className="chartss">{barchart}</div>
-    <div className="chartss">{bubblechart}</div>
-	</>
-	)
-
-
-}
-
-
-
+  return (
+    <>
+      <div style={{ textAlign: "center", color: "white" }}>
+        <h1>Graph Representation</h1>
+        <small>StateWise Data</small>
+      </div>
+      <div className="chartss">{lineChart}</div>
+      <div className="chartss">{barchart}</div>
+      <div className="chartss">{bubblechart}</div>
+    </>
+  );
+};
 
 export default Chart;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // class Chart extends Component{
 
@@ -187,7 +153,7 @@ export default Chart;
 // 			dailyData:[]
 // 		}
 // 	}
-   
+
 //     componentDidMount(){
 //         const fetchAPI=async()=>{
 //             const fetchData=await getCovidData()
@@ -202,11 +168,10 @@ export default Chart;
 
 //     }
 
-
 //        lineChart=()=>{
 
 //       	 const line= <Line
-//       	     data={{ 
+//       	     data={{
 //       	     	labels:this.state.dailyData.map((item)=>{ return item.name}),
 //       	     	datasets:[{
 //       	     		data:this.state.dailyData.map((item)=>{ return item.confirmed}),
@@ -222,7 +187,6 @@ export default Chart;
 //       	     }}
 //       	/>
 
-      	
 //       }
 
 //   render(){
@@ -231,16 +195,8 @@ export default Chart;
 //   		<>
 //            <h1>Charts</h1>
 //            {this.lineChart}
-//   	     </>	
+//   	     </>
 //   		)
 //   }
 
-
 // }
-
-
-
-
-    
-	
-

@@ -73,7 +73,12 @@ class Login extends Component {
       <div className="login-popup">
         <div className="box">
           <div class="image-area">
-            <h2 className="Head">Aditya & Company pvt. ltd. Welcomes You !</h2>
+            <h2 className="Head">Groww Family Welcomes You !</h2>
+            <div>
+              <small style={{ color: "white" }}>
+                (Login or Signup To Check Covid Records)
+              </small>
+            </div>
           </div>
 
           <div className="form">
@@ -86,6 +91,7 @@ class Login extends Component {
                   className="form-control"
                   value={this.state.email}
                   onChange={(e) => this.handlechange(e)}
+                  style={{ color: "white" }}
                 />
               </div>
               <div className="form-group">
@@ -95,6 +101,7 @@ class Login extends Component {
                   placeholder="password"
                   className="form-control"
                   value={this.state.password}
+                  style={{ color: "white" }}
                   onChange={(e) => this.handlechange(e)}
                 />
               </div>

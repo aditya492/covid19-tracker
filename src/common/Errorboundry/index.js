@@ -24,7 +24,7 @@ class ErrorBoundry extends Component {
     if (this.state.hasError) {
       return (
         <div style={{ color: "white", textAlign: "center" }}>
-          <h1> An Error Occured on Developement Side</h1>
+          <h1> Oops 404 Page Not Found!</h1>
         </div>
       );
     }

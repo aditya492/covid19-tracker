@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Fire from "../../helper/Fire";
 import Home from "../Home";
 import Login from "../Login";
+import District from "../District";
 
 class Root extends Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class Root extends Component {
   }
 
   render() {
-    return <>{this.state.user ? <Home /> : <Login />}</>;
+    return <>{this.state.user ? <Home /> : <Login />};</>;
   }
 }
 

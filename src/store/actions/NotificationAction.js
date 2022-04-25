@@ -6,7 +6,7 @@ import {FETCH_NOTIFICATION_REQ,
 export const fetchNotiData=()=>async dispatch=>{
 	dispatch(fetchNotiReq())
   try{
-  	const resp=await axios.get("https://api.covid19india.org/updatelog/log.json")
+  	const resp=await axios.get("https://cors-anywhere.herokuapp.com/https://api.covid19india.org/updatelog/log.json")
   	const userData=resp
   	dispatch(fetchNotiSuc(userData))
   }

@@ -11,8 +11,8 @@ const getCovidData=async()=>{
 
  else{ 
  	try{
-       const resp= await axios.get("https://api.covid19india.org/v4/min/data.min.json")
-        	 	lscache.set("covid",JSON.stringify(resp),60)
+       const resp= await axios.get("https://cors-anywhere.herokuapp.com/https://api.covid19india.org/v4/min/data.min.json")
+        	 	    lscache.set("covid",JSON.stringify(resp),60)
         	 	 return new Promise(resolve=> resolve(resp)) 
  	} catch(err){
  		

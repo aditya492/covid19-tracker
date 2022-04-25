@@ -47,9 +47,7 @@ arrowMove:true
 
 
 componentDidMount(){
-this.props.fetchCovidData()
-
-
+this.props.fetchCovidData();
 }
 
 

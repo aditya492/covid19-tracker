@@ -18,6 +18,8 @@ export const  fetchCovidData=(matchid)=> async dispatch=>{
 const response=await getCovidData();
 
 const dataObject=response.data
+console.log("xxxx",response)
+
 const data=tabledatatoarr(response.data)
 const indiaData=response.data['TT'];
 
